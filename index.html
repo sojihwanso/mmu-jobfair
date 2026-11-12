@@ -95,7 +95,56 @@ nav.tabs .wrap{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr
 .fsort button{height:30px;padding:0 10px;border:1px solid var(--line);border-radius:3px;font-size:12.5px}
 .fsort button[aria-pressed="true"]{border-color:var(--accent);color:var(--fg);font-weight:600}
 .post .nick{color:var(--fg);font-weight:600}
-@media (pointer:coarse){.q input,#btext,select{font-size:16px}}
+button.nick{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;padding:6px 0;margin:-6px 0;touch-action:manipulation}
+.post .pa2{justify-content:flex-start}
+.pa2 .sp{flex:1}
+.post .pa2 button.cbtn,.post .pa2 button.rbtn{padding:6px 14px 6px 0}
+.post .pa2 button.cbtn{color:var(--fg)}
+.post .pa2 button.cbtn[aria-expanded="true"]{color:var(--accent)}
+.cbtn b{font-weight:600}
+.cmts{margin:4px 0 6px;padding-left:12px;border-left:2px solid var(--line)}
+.cm{padding:8px 0 0;border-top:1px solid var(--line)}
+.cm:first-child{border-top:0;padding-top:2px}
+.cm.re{margin-left:10px;padding-left:12px;border-top:0;border-left:1px solid var(--line)}
+.cm .pb{font-size:14px}
+.cm.gone .pb{color:var(--g2);font-size:13px;margin:0;padding-bottom:8px}
+.at{color:var(--accent);font-weight:600}
+.cnote{font-size:12.5px;color:var(--g1);padding:6px 0}
+.cform{padding:8px 0 2px}
+.rto{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--g1);padding-bottom:6px;flex-wrap:wrap}
+.rto b{color:var(--accent);font-weight:600}
+.crow2{display:flex;gap:8px;align-items:flex-end}
+.ctext{flex:1;min-width:0;display:block;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg);padding:7px 10px;font:inherit;line-height:1.45;resize:none;height:38px;max-height:120px}
+.ctext:focus{outline:0;border-color:var(--fg)}
+.cform .bsend{height:38px}
+.cform .bmsg{min-height:0;padding-top:4px}
+.cform .bmsg:empty{display:none}
+.bme{font-size:12.5px;color:var(--g1);padding:0 0 8px}
+.bme b{color:var(--fg);font-weight:600}
+#modal.top{place-items:start center}
+#modal.top .panel{border-top:0;border-bottom:1px solid var(--line);padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:16px}
+.fl{display:block;font-size:12px;color:var(--g1);margin:10px 0 4px}
+.nrow{display:flex;gap:8px;align-items:center}
+.nin{flex:1;min-width:0;width:100%;height:44px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg);padding:0 12px;font-size:16px}
+.nin:focus{outline:0;border-color:var(--fg)}
+#npin{flex:none;width:118px;letter-spacing:.25em}
+.nbtn{height:44px;padding:0 12px;border:1px solid var(--line);border-radius:3px;font-size:13px;white-space:nowrap;flex:none}
+.nrow .bsend{height:44px;flex:1;min-width:0;text-align:center;padding:0 8px}
+.panel .nnote{font-size:12px;margin:8px 0 0;line-height:1.5}
+.nfoot{display:flex;align-items:center;min-height:36px;margin-top:4px}
+.cph{display:flex;align-items:center;gap:12px;padding:12px 0 4px;font-size:12.5px;color:var(--g1)}
+.cph b{color:var(--fg);font-weight:600;flex:1;font-size:13.5px}
+.cph b span{color:var(--accent);margin-left:6px}
+.cpk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+.cpk button{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 0;font-size:13.5px;line-height:1.25;border-bottom:1px solid var(--line);min-width:0}
+.cpk .bx{width:18px;height:18px;border:1.5px solid var(--g2);border-radius:2px;display:grid;place-items:center;color:transparent;flex:none}
+.cpk button[aria-pressed="true"] .bx{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.cpk .bx svg{width:14px;height:14px;stroke-width:2.4}
+.cpk .nm2{flex:1;min-width:0}
+.cpk small{color:var(--g2);font-size:11px;flex:none}
+.cpd{margin:2px 0 10px}
+.cpd summary{font-size:12.5px;color:var(--accent);padding:12px 0 10px;cursor:pointer}
+@media (pointer:coarse){.q input,#btext,select,.ctext{font-size:16px}}
 nav.tabs button{height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;white-space:nowrap;color:var(--g1);border-top:2px solid transparent;margin-top:-1px}
 nav.tabs button[aria-current="page"]{color:var(--accent);border-top-color:var(--accent);font-weight:600}
 main{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
@@ -303,7 +352,7 @@ const store={get(k,d){try{const v=localStorage.getItem('mmujf.'+k);return v==nul
 /* ---------- 즐겨찾기 등록 수: 공용 저장소 (자체 주소판에서만 켜진다. 값이 비어 있으면 꺼진 채로 지금처럼 동작) ---------- */
 const HOSTED=true;
 const CLOUD={url:"https://ojgsvtekeyzdhrwhdccj.supabase.co",key:"sb_publishable_MlphL4ZwUTm0_h4JJfvCfw_BPQLGybc",poll:15000};
-const cloud={on:!!(CLOUD.url&&CLOUD.key),ok:false,counts:{},all:0,fail:0,at:0,board:{open:false,last:0,n:0},slots:{}};
+const cloud={on:!!(CLOUD.url&&CLOUD.key),ok:false,counts:{},all:0,fail:0,at:0,v:0,board:{open:false,last:0,n:0,ct:0,cn:0},slots:{}};
 const POP={k:'pop',n:'관심',full:'즐겨찾기 등록',note:'이 페이지에서 즐겨찾기한 사람 수입니다. 브라우저 기준이라 실제 사람 수와 조금 다를 수 있고, 다른 사람이 누른 것은 10~15초 안에 보입니다. 순위는 탭을 다시 누르면 새로 매겨집니다.'};
 const canStore=(()=>{try{localStorage.setItem('mmujf.t','1');localStorage.removeItem('mmujf.t');return true;}catch(e){return false;}})();
 function cnt(id){return cloud.counts[id]||0;}
@@ -325,11 +374,13 @@ async function rpc(fn,body){const h={'apikey':CLOUD.key,'Content-Type':'applicat
 function applyCounts(rows){const c={};let all=0;for(const r of rows||[]){if(r.org_id==='_all')all=+r.cnt||0;else c[r.org_id]=+r.cnt||0;}
   cloud.counts=c;cloud.all=all;cloud.ok=true;cloud.fail=0;cloud.at=Date.now();paintCounts();}
 // 주기적으로 받는 값: 기업별 등록 수 + 게시판 상태(열림 여부, 최근 글 번호, 글 수)
-function applyPull(j){j=j||{};cloud.counts=j.counts||{};cloud.slots=j.slots||{};cloud.all=+j.all||0;cloud.ok=true;cloud.fail=0;cloud.at=Date.now();paintCounts();
-  const b=j.board||{},was=cloud.board.open;cloud.board={open:!!b.open,last:+b.last||0,n:+b.n||0};
+function applyPull(j){j=j||{};cloud.counts=j.counts||{};cloud.slots=j.slots||{};cloud.all=+j.all||0;cloud.v=+j.v||0;cloud.ok=true;cloud.fail=0;cloud.at=Date.now();paintCounts();
+  const b=j.board||{},was=cloud.board.open;cloud.board={open:!!b.open,last:+b.last||0,n:+b.n||0,ct:+b.ct||0,cn:+b.cn||0};
   if(was!==cloud.board.open){if(!cloud.board.open&&st.tab==='board'){st.tab='browse';if(!st.org)go('browse');}else renderTabs();}
-  if(cloud.board.open){if(st.tab==='board'&&!st.org&&(cloud.board.last!==board.last||cloud.board.n!==board.n))loadBoard();
-    else{const d=document.querySelector('#tabs [data-tab="board"] .tb');if(d)d.hidden=!(cloud.board.last>board.seen&&st.tab!=='board');}}}
+  if(cloud.board.open){const c=cloud.board;
+    if(st.tab==='board'&&!st.org&&(c.last!==board.last||c.n!==board.n||c.ct!==board.ct||c.cn!==board.cn))loadBoard();
+    else{const d=document.querySelector('#tabs [data-tab="board"] .tb');if(d)d.hidden=!(boardNew()&&st.tab!=='board');}}
+  maybeAskNick();}
 function cloudFail(e){cloud.fail++;cloud.err=(e&&e.message)||'연결 실패';const t=$('#popnote');if(t)t.textContent=popNote();const s=$('#cloudstat');if(s)s.textContent=cloudStat();}
 function cloudStat(){const hm=d=>String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
   if(cloud.fail)return `저장소 연결 실패 (${cloud.err})`;return cloud.ok?`저장소 연결 정상 · ${hm(new Date(cloud.at))}에 마지막으로 받음`:'저장소에 연결하는 중…';}
@@ -355,8 +406,8 @@ function cloudSync(now){if(!cloud.on)return;clearTimeout(syncT);syncT=setTimeout
   syncBusy=false;if(syncAgain){syncAgain=false;cloudSync(true);}},now?0:700);}
 async function cloudPoll(force){if(!cloud.on||document.visibilityState!=='visible'||(syncBusy&&!force))return;try{applyPull(await rpc('fair_pull'));}catch(e){cloudFail(e);}}
 function cloudStart(){if(!cloud.on)return;cloudPoll(true).then(()=>cloudSync(true));
-  // 평소 15초, '관심' 탭을 보고 있을 때는 10초마다 새로 받는다. 연달아 실패하면 2분으로 늦춘다.
-  const gap=()=>cloud.fail>=3?120000:(st.tab==='browse'&&st.metric==='pop'&&!st.org?Math.min(CLOUD.poll,10000):CLOUD.poll);
+  // 평소 15초, '관심' 탭이나 게시판을 보고 있을 때는 10초마다 새로 받는다. 연달아 실패하면 2분으로 늦춘다.
+  const gap=()=>cloud.fail>=3?120000:(((st.tab==='browse'&&st.metric==='pop')||st.tab==='board')&&!st.org?Math.min(CLOUD.poll,10000):CLOUD.poll);
   const loop=()=>setTimeout(async()=>{await cloudPoll();loop();},gap());loop();
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-cloud.at>15000)cloudPoll();});}
 
@@ -394,7 +445,7 @@ function setVisit(id,val){const old=st.visit[id]||null;if(old===val)return;const
 function askVisit(id,fresh){const p=vparse(st.visit[id]),n=new Date();
   const d=p?p.d:(n.getMonth()===10&&n.getDate()===13?13:12);
   vpick={id,fresh:!!fresh,day:d,ap:p?(p.h<12?'am':'pm'):(n.getHours()>=12?'pm':'am'),h:p?p.h:null,m:p?p.m:null};
-  panelMode='visit';paintPicker();$('#modal').hidden=false;}
+  panelMode='visit';paintPicker();$('#modal').classList.remove('top');$('#modal').hidden=false;}
 function paintPicker(){const {id,day,ap,h,m:mi,fresh}=vpick,o=ORG[id];if(!o)return;const v=st.visit[id],cnt=slotMap(id);
   const hours=ap==='am'?AMH:PMH,ready=h!=null&&mi!=null&&!pastTime(day,h,mi);
   $('#panel').innerHTML=`<h2>${fresh?'즐겨찾기에 넣었습니다':'방문 시간 고르기'}</h2>
@@ -408,6 +459,45 @@ function paintPicker(){const {id,day,ap,h,m:mi,fresh}=vpick,o=ORG[id];if(!o)retu
   <div class="vgrid vmin">${VMINS.map(x=>{const dis=h==null||pastTime(day,h,x);return `<button data-vmin="${x}" aria-pressed="${mi===x&&h!=null}"${dis?' disabled':''}><b>${mm(x)}분</b></button>`;}).join('')}</div>
   <div class="vfoot"><button class="txtbtn" data-vskip>${fresh?'나중에 고르기':'닫기'}</button>${v?'<button class="txtbtn" data-vclear>시간 지우기</button>':''}
    <button class="bsend" data-vsave${ready?'':' disabled'}>${ready?`${day}일 ${apOf(h)} ${h12(h)}:${mm(mi)} 저장`:'시간을 골라 주세요'}</button></div>`;}
+
+/* ---------- 닉네임 (게시판 글·댓글에 표시되는 이름. 저장소에 닉네임 기능이 있을 때만 쓴다) ---------- */
+const ADJ='졸린,배고픈,신난,수줍은,용감한,느긋한,바쁜,반짝이는,동글동글한,말랑한,씩씩한,상냥한,호기심 많은,꼼꼼한,부지런한,엉뚱한,다정한,똑똑한,날쌘,포근한,명랑한,차분한,행복한,설레는,든든한,재빠른,귀여운,따뜻한,해맑은,의젓한,조용한,당당한,기운찬,성실한,산뜻한,쫄깃한,보송보송한,폭신한,꿈꾸는,노래하는,춤추는,커피 마신,출근하는,항해하는,닻 내린,순항하는,바다를 본,파도 타는,등대 같은,새로 온'.split(',');
+const ANI='해달,펭귄,돌고래,고래,물범,해마,문어,오징어,꽃게,소라게,거북이,불가사리,해파리,갈매기,알바트로스,수달,고양이,강아지,햄스터,다람쥐,토끼,너구리,판다,코알라,미어캣,알파카,오리,병아리,참새,부엉이,고슴도치,쿼카,북극곰,바다사자,흰동가리,복어,가오리,새우,조개,바다표범'.split(',');
+const me={nick:store.get('nick',null)};
+let nickCb=null,nickBusy=false;
+const NWHY={nick:'닉네임은 2~12자의 한글·영문·숫자로 정해 주세요.',reserved:'쓸 수 없는 낱말이 들어 있습니다. 다른 닉네임을 골라 주세요.',pin:'비밀번호는 숫자 4자리로 정해 주세요.',
+  taken:'이미 쓰이고 있는 닉네임입니다. 내가 쓰던 닉네임이면 비밀번호를 다시 확인하고, 아니면 다른 닉네임을 골라 주세요.',locked:'이 닉네임은 비밀번호가 여러 번 틀려 잠시 잠겨 있습니다. 다른 닉네임을 고르거나, 내가 쓰던 닉네임이면 10분 뒤에 다시 시도해 주세요.',
+  many:'오늘 만들 수 있는 닉네임 수를 넘었습니다.',full:'지금은 새 닉네임을 만들 수 없습니다.',device:'이 브라우저에서는 닉네임을 저장할 수 없습니다.'};
+const nickOn=()=>cloud.v>=4||board.v4;
+const rollNick=()=>ADJ[Math.random()*ADJ.length|0]+' '+ANI[Math.random()*ANI.length|0];
+function bmeInner(){return me.nick?`닉네임 <b>${esc(me.nick)}</b> <button type="button" class="txtbtn" data-nickedit>바꾸기</button>`:`닉네임을 아직 정하지 않았습니다. <button type="button" class="txtbtn" data-nickedit>닉네임 정하기</button>`;}
+function setMe(n){me.nick=n||null;store.set('nick',me.nick);const el=$('#bme');if(el){el.hidden=!nickOn();el.innerHTML=bmeInner();}}
+function closeModal(){$('#modal').hidden=true;$('#modal').classList.remove('top');panelMode='';}
+// first: 처음 접속했을 때 한 번 묻는 경우. cb: 닉네임을 정한 뒤 이어서 할 일(쓰던 글 올리기)
+function askNick(first,cb){nickCb=cb||null;panelMode='nick';store.set('nickAsked',true);
+  $('#panel').innerHTML=`<form id="nform" autocomplete="off"><h2>${me.nick?'닉네임 바꾸기':'닉네임 정하기'}</h2>
+  <p>게시판 글과 댓글에 표시되는 이름입니다. 추천 닉네임을 그대로 쓰거나 고쳐 쓸 수 있습니다.</p>
+  <label class="fl" for="nname">닉네임 · 2~12자 (한글, 영문, 숫자)</label>
+  <div class="nrow"><input class="nin" id="nname" maxlength="12" value="${esc(me.nick||rollNick())}" autocomplete="off" autocapitalize="off" spellcheck="false"><button type="button" class="nbtn" data-nroll>다른 추천</button></div>
+  <label class="fl" for="npin">비밀번호 · 숫자 4자리</label>
+  <div class="nrow"><input class="nin" id="npin" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="0000" autocomplete="off"><button class="bsend" id="nsave" type="submit">${me.nick?'저장':'이 닉네임으로 시작'}</button></div>
+  <div class="bmsg" id="nmsg" role="status"></div>
+  <p class="nnote">닉네임은 한 사람만 쓸 수 있고, 비밀번호는 다른 사람이 같은 닉네임을 쓰지 못하게 막아 줍니다. 휴대폰을 바꾸거나 브라우저 기록을 지웠을 때도 같은 닉네임과 비밀번호를 넣으면 이어서 쓸 수 있습니다. 다른 곳에서 쓰는 비밀번호는 넣지 마세요.</p>
+  <div class="nfoot"><button type="button" class="txtbtn" data-nskip>${first?'나중에 정하기':'닫기'}</button></div></form>`;
+  $('#modal').classList.add('top');$('#modal').hidden=false;}
+async function saveNick(){if(nickBusy)return;const nm=$('#nname').value.replace(/\s+/g,' ').trim(),pin=$('#npin').value.trim(),msg=$('#nmsg');
+  if(nm.replace(/ /g,'').length<2||nm.length>12||!/^[가-힣ㄱ-ㅎㅏ-ㅣA-Za-z0-9 ]+$/.test(nm)){msg.textContent=NWHY.nick;return;}
+  if(!/^\d{4}$/.test(pin)){msg.textContent=NWHY.pin;return;}
+  nickBusy=true;$('#nsave').disabled=true;msg.textContent='';
+  try{const j=await rpc('fair_join',{p_device:deviceId(),p_nick:nm,p_pin:pin});
+    if(j&&j.ok){const cb=nickCb;nickCb=null;setMe(j.nick);closeModal();toast(j.new?`‘${j.nick}’ 닉네임으로 시작합니다`:`‘${j.nick}’ 닉네임을 불러왔습니다`);
+      if(st.tab==='board'&&!st.org){board.last=-1;loadBoard();}if(cb)cb();}
+    else msg.textContent=NWHY[j&&j.reason]||'닉네임을 저장하지 못했습니다.';
+  }catch(e){msg.textContent=/HTTP 404/.test(e.message)?'닉네임 기능이 아직 준비되지 않았습니다.':'저장하지 못했습니다. 연결을 확인하고 다시 시도해 주세요.';}
+  nickBusy=false;const b=$('#nsave');if(b)b.disabled=false;}
+// 처음 접속했을 때 한 번만 묻는다 (게시판이 열려 있고, 다른 창이 떠 있지 않고, 무언가 입력하는 중이 아닐 때)
+function maybeAskNick(){if(!(cloud.on&&cloud.v>=4&&cloud.board.open&&canStore&&st.major&&!me.nick)||store.get('nickAsked',false))return;
+  const a=document.activeElement;if(st.org||!$('#modal').hidden||!$('#lb').hidden||(a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)))return;askNick(true);}
 
 const METRICS=[
  {k:'cadet',n:'실습생',full:'승선실습생',note:'2027년 승선실습생 선발계획 · <span class="key nav"></span>항해 <span class="key eng"></span>기관',plus:1},
@@ -426,7 +516,7 @@ const SECNAME={intro:'기업소개',cadet:'승선실습생 선발계획',scholar
 const CGROUPS=['전체','해운선사','관련 기관·단체','관공서','해기사 회관','마리너스 빌딩'];
 
 let D=null,ORG={},SHIP=[],AG=[],BORDER={};
-const st={tab:'browse',cat:'ship',metric:'cadet',sort:'val',q:'',major:store.get('major',null),fav:new Set(store.get('fav',[])),seen:new Set(store.get('seen',[])),bld:'A',spot:null,zoom:false,favView:'list',favSort:'booth',visit:store.get('visit',{}),cq:'',cg:'전체',org:null};
+const st={tab:'browse',cat:'ship',metric:'cadet',sort:'val',q:'',major:store.get('major',null),fav:new Set(store.get('fav',[])),seen:new Set(store.get('seen',[])),bld:'A',spot:null,zoom:false,favView:'list',favSort:'booth',visit:store.get('visit',{}),cmp:store.get('cmp',{}),cmpMore:false,cq:'',cg:'전체',org:null};
 const maj=()=>st.major||'all';
 const mv=(o,k)=>k==='pop'?popView(o):(o.m[k][maj()]||o.m[k].all);
 const floorOf=r=>/^\d{4}/.test(r)?r[1]+'층':'';
@@ -576,25 +666,35 @@ function renderMap(){
 }
 
 /* ---------- 즐겨찾기 ---------- */
+// 나란히 비교에 넣을 선사: 따로 고르지 않았으면 즐겨찾기한 선사, 체크·해제한 곳은 그 선택을 따른다
+const cmpHas=id=>id in st.cmp?!!st.cmp[id]:st.fav.has(id);
 function renderFav(){
   const L=[...st.fav].map(id=>ORG[id]).filter(Boolean).sort((a,b)=>BORDER[a.id]-BORDER[b.id]);
-  if(!L.length){$('#app').innerHTML=`<div class="empty">아직 즐겨찾기한 곳이 없습니다.<br>둘러보기나 지도에서 기업 이름 옆의 별을 누르면<br>여기에 모이고, 방문한 곳을 체크할 수 있습니다.<br><br><button class="txtbtn" data-tab="browse">둘러보기로 가기</button></div>`;return;}
   const done=L.filter(o=>st.seen.has(o.id)).length;
+  const ships=[...SHIP].sort((a,b)=>BORDER[a.id]-BORDER[b.id]),S=ships.filter(o=>cmpHas(o.id));
   let body='';
-  if(st.favView==='list'){let prev='';const byTime=st.favSort==='time';
+  if(st.favView==='list'){
+    if(!L.length)body=`<div class="empty">아직 즐겨찾기한 곳이 없습니다.<br>둘러보기나 지도에서 기업 이름 옆의 별을 누르면<br>여기에 모이고, 방문한 곳을 체크할 수 있습니다.<br><br><button class="txtbtn" data-tab="browse">둘러보기로 가기</button></div>`;
+    else{let prev='';const byTime=st.favSort==='time';
     const vkey=o=>{const p=vparse(st.visit[o.id]);return p?p.d*10000+p.h*100+p.m:999999;};
     const LL=byTime?[...L].sort((a,b)=>vkey(a)-vkey(b)||BORDER[a.id]-BORDER[b.id]):L;
     body=`<div class="fsort"><span>정렬</span><button data-favsort="booth" aria-pressed="${!byTime}">부스 순</button><button data-favsort="time" aria-pressed="${byTime}">방문 시간 순</button></div>`+LL.map(o=>{
       const g=byTime?(st.visit[o.id]?hourLabel(slotKey(st.visit[o.id])):'시간 미정'):`${o.bld} ${D.bld[o.bld].name}`;const head=g!==prev?`<div class="h">${g}</div>`:'';prev=g;const s=st.seen.has(o.id);
       return `${head}<div class="frow${s?' done':''}"><button class="chk" data-seen="${o.id}" aria-pressed="${s}" aria-label="방문 완료"><span>${IC.check}</span></button><button class="fm" data-org="${o.id}"><div class="nm">${esc(o.name)}</div><div class="code">${o.code} · ${o.room}${/^\d/.test(o.room)?'호':''} ${floorOf(o.room)}</div></button><button class="vt" data-vpick="${o.id}" data-vt="${o.id}" aria-label="방문 시간">${vtInner(o.id)}</button>${starBtn(o.id)}</div>`;}).join('');
-    body+=`<p class="note">${byTime?'고른 방문 시간 순서입니다.':'건물과 부스 번호 순서입니다.'} 왼쪽 네모를 누르면 방문 완료로, 오른쪽 시간을 누르면 방문 예정 시간을 바꿀 수 있습니다. 시간은 박람회장 포스터에서 확인하세요. 참석 확인서에는 확인 스티커 2개 이상이 필요합니다(책자 168~169쪽). <button class="txtbtn" data-tab="info">안내 보기</button></p>`;
-  }else{const S=L.filter(o=>o.m);
-    body=S.length?`<div class="tw"><table class="t cmp"><tr><th></th>${S.map(o=>`<th><button data-org="${o.id}">${esc(o.name)}<br><span class="code">${o.code}</span></button></th>`).join('')}</tr>
+    body+=`<p class="note">${byTime?'고른 방문 시간 순서입니다.':'건물과 부스 번호 순서입니다.'} 왼쪽 네모를 누르면 방문 완료로, 오른쪽 시간을 누르면 방문 예정 시간을 바꿀 수 있습니다. 시간은 박람회장 포스터에서 확인하세요. 참석 확인서에는 확인 스티커 2개 이상이 필요합니다(책자 168~169쪽). <button class="txtbtn" data-tab="info">안내 보기</button></p>`;}
+  }else{const favS=ships.filter(o=>st.fav.has(o.id)),rest=ships.filter(o=>!st.fav.has(o.id)),nr=rest.filter(o=>cmpHas(o.id)).length;
+    const pick=o=>`<button data-cmp="${o.id}" aria-pressed="${cmpHas(o.id)}"><span class="bx">${IC.check}</span><span class="nm2">${esc(o.name)}</span><small>${o.code}</small></button>`;
+    body=`<div class="cph"><b>비교할 선사 고르기<span>${S.length}곳 선택</span></b><button class="txtbtn" data-cmpall="fav">즐겨찾기만</button><button class="txtbtn" data-cmpall="none">모두 해제</button></div>
+      ${favS.length?`<div class="cpk">${favS.map(pick).join('')}</div>`:'<p class="note">즐겨찾기한 해운선사가 아직 없습니다. 아래 목록에서 비교할 선사를 골라도 됩니다.</p>'}
+      ${rest.length?`<details class="cpd"${st.cmpMore||!favS.length?' open':''}><summary>즐겨찾기하지 않은 선사 ${rest.length}곳${nr?` · ${nr}곳 선택`:''}</summary><div class="cpk">${rest.map(pick).join('')}</div></details>`:''}
+      ${S.length?`<div class="tw"><table class="t cmp"><tr><th></th>${S.map(o=>`<th><button data-org="${o.id}">${esc(o.name)}<br><span class="code">${o.code}</span></button></th>`).join('')}</tr>
       ${cloud.on?`<tr><td>${POP.full}</td>${S.map(o=>`<td><b data-fcn="${o.id}">${cloud.ok?cnt(o.id)+'명':'–'}</b></td>`).join('')}</tr>`:''}
       ${METRICS.map(M=>`<tr><td>${M.full}</td>${S.map(o=>{const m=mv(o,M.k);return `<td><b>${esc(m.v)}</b>${m.s?`<small>${esc(m.s)}</small>`:''}</td>`;}).join('')}</tr>`).join('')}</table></div>
-      <p class="note">즐겨찾기한 해운선사 ${S.length}곳을 나란히 놓았습니다. 옆으로 밀어서 보세요.${L.length>S.length?' 관계기관은 항목이 달라 이 표에 넣지 않았습니다.':''} ${PLUSNOTE}</p>`:'<div class="empty">비교표는 해운선사를 즐겨찾기하면 나타납니다.</div>';}
-  $('#app').innerHTML=`<div class="segs"><button data-favview="list" aria-pressed="${st.favView==='list'}">방문 목록<small>${done}/${L.length}</small></button><button data-favview="cmp" aria-pressed="${st.favView==='cmp'}">나란히 비교</button></div>${body}`;
+      <p class="note">체크한 해운선사 ${S.length}곳을 부스 순서대로 나란히 놓았습니다. 옆으로 밀어서 보세요. 관계기관은 항목이 달라 이 표에 넣지 않습니다. ${PLUSNOTE}</p>`:'<div class="empty">위에서 비교할 선사를 체크하세요.</div>'}`;}
+  $('#app').innerHTML=`<div class="segs"><button data-favview="list" aria-pressed="${st.favView==='list'}">방문 목록<small>${done}/${L.length}</small></button><button data-favview="cmp" aria-pressed="${st.favView==='cmp'}">나란히 비교<small>${S.length}</small></button></div>${body}`;
 }
+// 체크를 바꿀 때: 세로 위치와 표의 가로 위치를 그대로 둔다
+function repaintFav(){const tw=$('#app .tw'),sl=tw?tw.scrollLeft:0,y=window.scrollY;render();const t2=$('#app .tw');if(t2)t2.scrollLeft=sl;window.scrollTo(0,y);}
 
 /* ---------- 연락처 ---------- */
 function contactList(){const q=st.cq.trim().toLowerCase().replace(/-/g,'');
@@ -628,67 +728,185 @@ function renderInfo(){
   <div class="hh">자료 안내</div>
   <p class="note">2026 MMU 취업박람회 책자(170쪽)의 내용을 정리한 화면입니다. 숫자와 표기는 책자 그대로이며, 기업 상세의 ‘책자 원문’에서 원래 표와 쪽수를 볼 수 있습니다. 연락처는 책자 167쪽 그림을 읽어 옮긴 것이라 중요한 번호는 원본과 한 번 더 확인하세요. 즐겨찾기·방문 체크·전공·화면 설정은 이 기기의 브라우저에만 저장됩니다.</p>
   ${cloud.on?`<div class="hh">즐겨찾기 등록 수</div>
-  <p class="note">별 옆의 숫자는 이 페이지에서 그 기업을 즐겨찾기한 사람 수입니다. 로그인은 없고, 별을 누르면 이 브라우저에 만들어진 무작위 아이디와 기업 이름만 공용 저장소에 기록됩니다. 이름·연락처 같은 개인정보는 보내지 않습니다. 브라우저 기준으로 세기 때문에 실제 사람 수와 조금 다를 수 있습니다.<br><span id="cloudstat">${esc(cloudStat())}</span></p>`:''}`;
+  <p class="note">별 옆의 숫자는 이 페이지에서 그 기업을 즐겨찾기한 사람 수입니다. 로그인은 없고, 별을 누르면 이 브라우저에 만들어진 무작위 아이디와 기업 이름만 공용 저장소에 기록됩니다. 이름·연락처 같은 개인정보는 보내지 않습니다. 브라우저 기준으로 세기 때문에 실제 사람 수와 조금 다를 수 있습니다.${nickOn()?' 게시판 닉네임을 정하면 닉네임과 비밀번호(숫자 4자리)도 공용 저장소에 저장됩니다. 비밀번호는 원래 숫자를 알 수 없게 바꾼 값으로 저장하지만, 다른 곳에서 쓰는 비밀번호는 넣지 마세요.':''}<br><span id="cloudstat">${esc(cloudStat())}</span></p>`:''}`;
 }
 
 /* ---------- 게시판 (공용 저장소가 켜져 있고, 저장소에서 게시판을 열어 둔 동안에만 보인다) ---------- */
-const board={posts:[],last:-1,n:-1,more:false,busy:false,seen:store.get('boardSeen',0),reported:new Set(store.get('boardRep',[])),msg:''};
+// open: 댓글을 펼쳐 둔 글 번호(최대 5개), th: 글별 댓글 목록, reply: 글별 답글 대상 {parent, to}, draft: 쓰던 댓글
+const board={posts:[],last:-1,n:-1,ct:-1,cn:-1,more:false,busy:false,again:false,seen:store.get('boardSeen',0),reported:new Set(store.get('boardRep',[])),msg:'',v4:false,open:[],th:{},terr:{},reply:{},draft:{},cmsg:{},arm:null,sig:{}};
+const boardNew=()=>Math.max(cloud.board.last,cloud.board.ct)>board.seen;
 const BWHY={closed:'게시판이 닫혀 있습니다.',empty:'내용을 입력해 주세요.',long:'200자까지 쓸 수 있습니다.',link:'링크는 올릴 수 없습니다.',phone:'전화번호나 긴 숫자는 올릴 수 없습니다.',
-  fast:'30초에 한 번만 쓸 수 있습니다. 잠시 뒤 다시 올려 주세요.',daily:'하루에 쓸 수 있는 글 수를 넘었습니다.',busy:'지금 글이 몰리고 있습니다. 잠시 뒤 다시 올려 주세요.'};
+  fast:'30초에 한 번만 쓸 수 있습니다. 잠시 뒤 다시 올려 주세요.',daily:'하루에 쓸 수 있는 수를 넘었습니다.',busy:'지금 글이 몰리고 있습니다. 잠시 뒤 다시 올려 주세요.',
+  nothread:'글이 지워졌거나 숨겨져 댓글을 달 수 없습니다.',fast2:'댓글은 5초에 한 번만 쓸 수 있습니다. 잠시 뒤 다시 올려 주세요.',full:'이 글에는 댓글을 더 달 수 없습니다.'};
+function boardNote(){return nickOn()
+  ?'박람회 질문·정보를 나누는 게시판입니다. 특정 기업이나 사람에 대한 비방, 개인정보, 광고는 올리지 마세요. 링크와 전화번호는 올릴 수 없고, 신고가 3번 쌓인 글은 자동으로 숨겨집니다. 글 아래 ‘댓글’을 누르면 댓글을 달 수 있고, 댓글의 ‘답글’을 누르거나 <b>닉네임을 꾹 누르면</b> 그 사람을 @닉네임으로 부르며 답글을 쓸 수 있습니다.'
+  :'익명으로 남기는 박람회 질문·정보 게시판입니다. 특정 기업이나 사람에 대한 비방, 개인정보, 광고는 올리지 마세요. 링크와 전화번호는 올릴 수 없고, 신고가 3번 쌓인 글은 자동으로 숨겨집니다. 글에는 ‘졸린 해달’처럼 형용사와 동물 이름을 합친 별명이 자동으로 붙고(2,000가지), 같은 브라우저에서 쓴 글은 같은 별명입니다.';}
 function postTime(at){const t=new Date(at),n=new Date();const hm=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
   return t.toDateString()===n.toDateString()?hm:`${t.getMonth()+1}/${t.getDate()} ${hm}`;}
-function postHTML(p){const o=p.org&&ORG[p.org];const rep=board.reported.has(p.id);
-  return `<div class="post"><div class="pm"><b class="nick">${esc(p.name||'익명')}</b><span>${postTime(p.at)}</span>${o?`<button class="lk" data-org="${o.id}">${esc(o.code)} ${esc(o.name)}</button>`:''}${p.mine?'<span class="mine">내 글</span>':''}</div>
+const ARM={del:['삭제','삭제하려면 한 번 더'],rep:['신고','신고하려면 한 번 더']};
+const armOn=(kind,id)=>!!(board.arm&&board.arm.kind===kind&&board.arm.id===id&&Date.now()<board.arm.until);
+const armBtn=(kind,id)=>`<button type="button" data-b${kind}="${id}"${armOn(kind,id)?' data-armed="1"':''}>${ARM[kind][armOn(kind,id)?1:0]}</button>`;
+const delrep=x=>x.mine?armBtn('del',x.id):board.reported.has(x.id)?'<span>신고함</span>':armBtn('rep',x.id);
+// 댓글 한 줄. data-lp / data-reply = "글번호:답글이 붙을 댓글번호:이 댓글번호" (닉네임을 꾹 누르거나 '답글'을 누르면 쓰인다)
+function cmHTML(c,tid,re){
+  if(c.gone)return `<div class="cm gone${re?' re':''}"><div class="pb">삭제된 댓글입니다.</div></div>`;
+  const k=`${tid}:${c.parent||c.id}:${c.id}`;
+  return `<div class="cm${re?' re':''}"><div class="pm"><button type="button" class="nick" data-lp="${k}">${esc(c.name||'익명')}</button><span>${postTime(c.at)}</span>${c.mine?'<span class="mine">내 댓글</span>':''}</div>
+  <div class="pb">${c.mention?`<b class="at">@${esc(c.mention)}</b> `:''}${esc(c.body)}</div>
+  <div class="pa2"><button type="button" class="rbtn" data-reply="${k}">답글</button><span class="sp"></span>${delrep(c)}</div></div>`;}
+function clistHTML(tid){const L=board.th[tid];
+  if(!L)return `<div class="cnote">${board.terr[tid]?'댓글을 불러오지 못했습니다. 잠시 뒤 다시 시도합니다.':'댓글을 불러오는 중입니다…'}</div>`;
+  if(!L.length)return '<div class="cnote">아직 댓글이 없습니다. 첫 댓글을 남겨 보세요.</div>';
+  const ids=new Set(L.map(c=>c.id)),kids={},tops=[];
+  for(const c of L){if(c.parent&&ids.has(c.parent))(kids[c.parent]=kids[c.parent]||[]).push(c);else tops.push(c);}
+  return tops.map(c=>cmHTML(c,tid,false)+(kids[c.id]||[]).map(k=>cmHTML(k,tid,true)).join('')).join('');}
+function rtoInner(tid){const r=board.reply[tid];return r?`<b>@${esc(r.to)}</b><span>님에게 답글</span><button type="button" class="txtbtn" data-rcancel="${tid}">취소</button>`:'';}
+function cmtsHTML(tid){const r=board.reply[tid];
+  return `<div class="cmts" data-cmts="${tid}"><div data-clist="${tid}">${clistHTML(tid)}</div>
+  <form class="cform" data-cform="${tid}" autocomplete="off"><div class="rto" data-rto="${tid}"${r?'':' hidden'}>${rtoInner(tid)}</div>
+  <div class="crow2"><textarea class="ctext" data-ctext="${tid}" rows="1" maxlength="200" placeholder="${r?'답글 쓰기':'댓글 쓰기'}" aria-label="댓글">${esc(board.draft[tid]||'')}</textarea><button class="bsend" type="submit">등록</button></div>
+  <div class="bmsg" data-cmsg="${tid}" role="status">${esc(board.cmsg[tid]||'')}</div></form></div>`;}
+function postHTML(p){const o=p.org&&ORG[p.org],v4=board.v4,open=v4&&board.open.includes(p.id);
+  return `<div class="post" data-post="${p.id}"><div class="pm">${v4?`<button type="button" class="nick" data-lp="${p.id}::">${esc(p.name||'익명')}</button>`:`<b class="nick">${esc(p.name||'익명')}</b>`}<span>${postTime(p.at)}</span>${o?`<button class="lk" data-org="${o.id}">${esc(o.code)} ${esc(o.name)}</button>`:''}${p.mine?'<span class="mine">내 글</span>':''}</div>
   <div class="pb">${esc(p.body)}</div>
-  <div class="pa2">${p.mine?`<button data-bdel="${p.id}">삭제</button>`:rep?'<span>신고함</span>':`<button data-brep="${p.id}">신고</button>`}</div></div>`;}
-// 글 목록만 제자리에서 바꾼다 (쓰고 있던 글과 스크롤은 그대로 둔다)
+  <div class="pa2">${v4?`<button type="button" class="cbtn" data-thread="${p.id}" aria-expanded="${open}">댓글 <b data-pcn="${p.id}">${p.cn||0}</b></button>`:''}<span class="sp"></span>${delrep(p)}</div>${open?cmtsHTML(p.id):''}</div>`;}
+const typing=()=>{const a=document.activeElement;return !!(a&&a.classList&&a.classList.contains('ctext'));};
+const grow=t=>{t.style.height='auto';t.style.height=Math.min(120,Math.max(38,t.scrollHeight+2))+'px';};
+// 댓글 목록과 댓글 수만 제자리에서 바꾼다 (쓰고 있는 댓글 칸은 건드리지 않는다)
+// 글 하나가 어떤 내용으로 그려져 있는지의 기록. 내용이 같으면 그 글은 다시 그리지 않는다
+// (쓰던 댓글, 답글 대상, '한 번 더' 표시처럼 제자리에서 바꾸는 것들은 여기에 넣지 않는다)
+function sig(p){const open=board.v4&&board.open.includes(p.id),L=board.th[p.id];
+  return JSON.stringify([p.name,p.body,p.org,p.mine,p.cn,p.at,board.v4,board.reported.has(p.id),open,open?(L||(board.terr[p.id]?'e':'l')):0,open&&L?L.filter(c=>board.reported.has(c.id)).map(c=>c.id):0]);}
+function resig(id){const p=board.posts.find(x=>x.id===id);if(p)board.sig[id]=sig(p);}
+function paintThreads(){const a=typing()?document.activeElement:null,t0=a?a.getBoundingClientRect().top:0;
+  for(const id of board.open){const el=document.querySelector(`[data-clist="${id}"]`);if(el)el.innerHTML=clistHTML(id);}
+  for(const p of board.posts){const c=document.querySelector(`[data-pcn="${p.id}"]`);if(c)c.textContent=p.cn||0;}
+  board.open.forEach(resig);
+  if(a&&a.isConnected){const d=a.getBoundingClientRect().top-t0;if(Math.abs(d)>1)window.scrollBy(0,d);}}
+// 화면 맨 위에 걸려 있는 글을 기준으로, 새로 그린 뒤에도 그 글이 같은 자리에 오게 한다 (위에 새 글이 들어와도 읽던 곳이 밀리지 않는다)
+function keepPlace(fn){let a=null;if(window.scrollY>0)for(const p of document.querySelectorAll('#blist .post')){const r=p.getBoundingClientRect();if(r.bottom>60){a={id:p.dataset.post,top:r.top};break;}}
+  fn();if(a){const p=document.querySelector(`#blist [data-post="${a.id}"]`);if(p){const d=p.getBoundingClientRect().top-a.top;if(Math.abs(d)>1)window.scrollBy(0,d);}}}
+// 글 목록을 제자리에서 맞춘다: 새 글은 끼워 넣고, 지워진 글은 빼고, 내용이 바뀐 글만 새로 그린다 (쓰고 있던 글·댓글과 스크롤은 그대로 둔다)
 function paintBoard(){const el=$('#blist');if(!el)return;
-  el.innerHTML=board.posts.map(postHTML).join('')||`<div class="empty">${board.last<0?'글을 불러오는 중입니다…':'아직 글이 없습니다. 첫 글을 남겨 보세요.'}</div>`;
-  const m=$('#bmore');if(m)m.hidden=!board.more;const g=$('#bmsg');if(g)g.textContent=board.msg;}
-async function loadBoard(older){if(!cloud.on||board.busy)return;board.busy=true;
+  const m=$('#bmore');if(m)m.hidden=!board.more;const g=$('#bmsg');if(g)g.textContent=board.msg;
+  const b=$('#bme');if(b){b.hidden=!nickOn();b.innerHTML=bmeInner();}
+  const nt=$('#bnote');if(nt&&nt.dataset.v!==String(nickOn())){nt.dataset.v=String(nickOn());nt.innerHTML=boardNote();}
+  if(board.last>=0)board.open=board.open.filter(id=>board.posts.some(p=>p.id===id));
+  const tid=typing()?+document.activeElement.dataset.ctext:null;
+  keepPlace(()=>{
+    if(!board.posts.length){el.innerHTML=`<div class="empty">${board.last<0?'글을 불러오는 중입니다…':'아직 글이 없습니다. 첫 글을 남겨 보세요.'}</div>`;board.sig={};return;}
+    const have={};for(const n of [...el.children]){if(n.dataset.post)have[n.dataset.post]=n;else n.remove();}
+    let prev=null;
+    for(const p of board.posts){const s=sig(p);let n=have[p.id];delete have[p.id];
+      // 바뀐 글만 새로 그린다. 댓글을 쓰고 있는 글은 통째로 바꾸지 않고 아래에서 댓글 목록만 바꾼다.
+      const keep=n&&(p.id===tid||board.sig[p.id]===s);
+      if(!keep){const t=document.createElement('template');t.innerHTML=postHTML(p);const nn=t.content.firstElementChild;if(n)n.remove();n=nn;board.sig[p.id]=s;}
+      const want=prev?prev.nextElementSibling:el.firstElementChild;if(want!==n)el.insertBefore(n,want);
+      if(!keep)n.querySelectorAll('.ctext').forEach(grow);
+      prev=n;}
+    for(const id in have){have[id].remove();delete board.sig[id];}
+  });
+  if(tid!=null)paintThreads();}
+async function loadThreads(ids,quiet){ids=ids.slice(-5);if(!ids.length)return;
+  try{const j=await rpc('fair_board_threads',{p_device:deviceId(),p_ids:ids})||{};
+    for(const id of ids){board.th[id]=j[id]||[];delete board.terr[id];const p=board.posts.find(x=>x.id===id);if(p)p.cn=board.th[id].filter(c=>!c.gone).length;}
+  }catch(e){for(const id of ids)board.terr[id]=1;}
+  if(!quiet)paintThreads();}
+async function loadBoard(older){if(!cloud.on)return;if(board.busy){if(!older)board.again=true;return;}board.busy=true;
   try{const before=older&&board.posts.length?board.posts[board.posts.length-1].id:null;
+    const c=cloud.board,snap={last:c.last,n:c.n,ct:c.ct,cn:c.cn};
     const j=await rpc('fair_board_list',{p_device:deviceId(),p_before:before});const got=j.posts||[];
+    board.v4=+j.v>=4;if(board.v4&&(j.me||null)!==me.nick)setMe(j.me);
     if(older){board.posts=board.posts.concat(got);board.more=got.length>=50;}
     else{// 50개 미만이면 그것이 전체 목록이다. 50개가 찼을 때만 '더 보기'로 불러 둔 이전 글을 뒤에 이어 붙인다.
       const full=got.length>=50,minId=full?got[got.length-1].id:0;const tail=full?board.posts.filter(p=>p.id<minId):[];
-      board.more=full&&(tail.length?board.more:true);board.posts=got.concat(tail);board.last=cloud.board.last;board.n=cloud.board.n;
-      if(got.length&&got[0].id>board.seen){board.seen=got[0].id;store.set('boardSeen',board.seen);}}
+      board.more=full&&(tail.length?board.more:true);board.posts=got.concat(tail);Object.assign(board,snap);
+      const top=Math.max(got.length?got[0].id:0,snap.last,snap.ct);if(top>board.seen){board.seen=top;store.set('boardSeen',board.seen);}}
+    board.msg=board.msg==='글을 불러오지 못했습니다. 잠시 뒤 다시 시도합니다.'?'':board.msg;
+    const openIds=board.open.filter(id=>board.posts.some(p=>p.id===id));if(board.v4&&openIds.length)await loadThreads(openIds,true);
   }catch(e){board.msg='글을 불러오지 못했습니다. 잠시 뒤 다시 시도합니다.';}
-  board.busy=false;paintBoard();renderTabs();}
+  board.busy=false;paintBoard();renderTabs();
+  if(board.again){board.again=false;loadBoard();}}
 function renderBoard(){
   const orgs=[...D.orgs].sort((a,b)=>BORDER[a.id]-BORDER[b.id]);
   $('#app').innerHTML=`
   <form id="bform" autocomplete="off"><label class="hh" for="btext" style="display:block;padding-top:16px">게시판</label>
-   <p class="note">익명으로 남기는 박람회 질문·정보 게시판입니다. 특정 기업이나 사람에 대한 비방, 개인정보, 광고는 올리지 마세요. 링크와 전화번호는 올릴 수 없고, 신고가 3번 쌓인 글은 자동으로 숨겨집니다. 글에는 ‘졸린 해달’처럼 형용사와 동물 이름을 합친 별명이 자동으로 붙고(2,000가지), 같은 브라우저에서 쓴 글은 같은 별명입니다.</p>
+   <p class="note" id="bnote" data-v="${nickOn()}">${boardNote()}</p>
+   <div class="bme" id="bme"${nickOn()?'':' hidden'}>${bmeInner()}</div>
    <textarea id="btext" maxlength="200" rows="3" placeholder="예: A-1 부스는 11시 이후가 덜 붐벼요"></textarea>
    <div class="bbar"><select id="borg" aria-label="기업 꼬리표"><option value="">기업 꼬리표 없음</option>${orgs.map(o=>`<option value="${o.id}">${esc(o.code)} ${esc(o.name)}</option>`).join('')}</select><span class="cnt" id="bcnt">0/200</span><button class="bsend" type="submit">올리기</button></div>
    <div class="bmsg" id="bmsg" role="status"></div></form>
   <div id="blist"></div>
   <p class="note" style="text-align:center"><button class="txtbtn" id="bmore" data-bmore hidden>이전 글 더 보기</button></p>`;
-  board.msg='';paintBoard();loadBoard();
+  board.msg='';board.sig={};paintBoard();loadBoard();
 }
-async function sendPost(){const ta=$('#btext'),btn=document.querySelector('#bform .bsend');const body=ta.value.replace(/\s+/g,' ').trim();
+async function sendPost(){const ta=$('#btext'),btn=document.querySelector('#bform .bsend');if(!ta)return;const body=ta.value.replace(/\s+/g,' ').trim();
   if(!body){board.msg=BWHY.empty;paintBoard();return;}
+  if(nickOn()&&!me.nick){askNick(false,sendPost);return;}
   btn.disabled=true;board.msg='';
   try{const j=await rpc('fair_board_post',{p_device:deviceId(),p_body:body,p_org:$('#borg').value||null});
     if(j&&j.ok){ta.value='';$('#bcnt').textContent='0/200';board.msg='글을 올렸습니다.';cloud.board.last=Math.max(cloud.board.last,j.id);board.last=-1;await loadBoard();}
     else board.msg=BWHY[j&&j.reason]||'글을 올리지 못했습니다.';
   }catch(e){board.msg='글을 올리지 못했습니다. 연결을 확인하고 다시 시도해 주세요.';}
   btn.disabled=false;paintBoard();}
+// 댓글 펼치기·접기: 그 글 아래에만 붙였다 뗀다 (다른 글에서 쓰던 댓글과 스크롤은 그대로)
+function expandBtn(id,on){const b=document.querySelector(`[data-thread="${id}"]`);if(b)b.setAttribute('aria-expanded',on);}
+function closeThread(id){board.open=board.open.filter(x=>x!==id);const e=document.querySelector(`[data-cmts="${id}"]`);if(e)e.remove();expandBtn(id,false);resig(id);}
+function openThread(id){if(board.open.includes(id))return;board.open.push(id);while(board.open.length>5)closeThread(board.open[0]);
+  const host=document.querySelector(`[data-post="${id}"]`);if(host&&!host.querySelector('.cmts'))host.insertAdjacentHTML('beforeend',cmtsHTML(id));
+  expandBtn(id,true);const ta=document.querySelector(`[data-ctext="${id}"]`);if(ta)grow(ta);resig(id);loadThreads([id]);}
+function toggleThread(id){if(board.open.includes(id))closeThread(id);else openThread(id);}
+// 답글 대상 정하기: cid 가 없으면 글쓴이, 있으면 그 댓글(대댓글) 작성자를 @로 부른다
+function paintRto(tid){const el=document.querySelector(`[data-rto="${tid}"]`);if(!el)return;const r=board.reply[tid];el.hidden=!r;el.innerHTML=rtoInner(tid);
+  const ta=document.querySelector(`[data-ctext="${tid}"]`);if(ta)ta.placeholder=r?'답글 쓰기':'댓글 쓰기';}
+function setReply(tid,root,cid){if(!board.v4)return false;const p=board.posts.find(x=>x.id===tid);if(!p)return false;
+  let to=p.name;if(cid){const c=(board.th[tid]||[]).find(x=>x.id===cid);if(!c||c.gone)return false;to=c.name;}
+  if(!to)return false;openThread(tid);board.reply[tid]={parent:root||null,to};paintRto(tid);return true;}
+function focusComposer(tid){const ta=document.querySelector(`[data-ctext="${tid}"]`);if(!ta)return;if(document.activeElement!==ta)ta.focus();
+  const r=ta.getBoundingClientRect();if(r.bottom>window.innerHeight-90||r.top<60)ta.scrollIntoView({block:'center'});}
+async function sendComment(tid){const ta=document.querySelector(`[data-ctext="${tid}"]`);if(!ta)return;const body=ta.value.replace(/\s+/g,' ').trim();
+  const say=t=>{board.cmsg[tid]=t;const e=document.querySelector(`[data-cmsg="${tid}"]`);if(e)e.textContent=t;};
+  if(!body){say(BWHY.empty);return;}
+  if(!me.nick){askNick(false,()=>sendComment(tid));return;}
+  const btn=ta.closest('form').querySelector('.bsend');btn.disabled=true;say('');
+  try{const r=board.reply[tid];
+    const j=await rpc('fair_board_post',{p_device:deviceId(),p_body:body,p_org:null,p_thread:tid,p_parent:r?r.parent:null,p_mention:r?r.to:null});
+    if(j&&j.ok){delete board.draft[tid];delete board.reply[tid];const t2=document.querySelector(`[data-ctext="${tid}"]`);if(t2){t2.value='';t2.style.height='';}
+      paintRto(tid);await loadThreads([tid]);}
+    else say(BWHY[j&&j.reason]||'댓글을 올리지 못했습니다.');
+  }catch(e){say('댓글을 올리지 못했습니다. 연결을 확인하고 다시 시도해 주세요.');}
+  if(btn.isConnected)btn.disabled=false;}
 // 삭제·신고는 한 번 더 눌러야 실행된다 (잘못 누름 방지)
-function armed(btn,label){if(btn.dataset.armed)return true;btn.dataset.armed='1';const old=btn.textContent;btn.textContent=label;setTimeout(()=>{if(btn.isConnected){delete btn.dataset.armed;btn.textContent=old;}},4000);return false;}
+function disarm(){const a=board.arm;board.arm=null;clearTimeout(disarm.t);if(!a)return;const b=document.querySelector(`[data-b${a.kind}="${a.id}"]`);if(b){delete b.dataset.armed;b.textContent=ARM[a.kind][0];}}
+function armed(kind,id,btn){if(armOn(kind,id)){board.arm=null;clearTimeout(disarm.t);return true;}
+  disarm();board.arm={kind,id,until:Date.now()+4000};btn.dataset.armed='1';btn.textContent=ARM[kind][1];disarm.t=setTimeout(disarm,4000);return false;}
 async function boardAct(kind,id,btn){
-  if(!armed(btn,kind==='del'?'삭제하려면 한 번 더':'신고하려면 한 번 더'))return;
+  if(!armed(kind,id,btn))return;
   try{const j=await rpc(kind==='del'?'fair_board_delete':'fair_board_report',{p_device:deviceId(),p_id:id});
-    if(kind==='del'){if(j&&j.ok){board.posts=board.posts.filter(p=>p.id!==id);board.msg='글을 지웠습니다.';}}
+    if(kind==='del'){if(j&&j.ok){board.posts=board.posts.filter(p=>p.id!==id);board.msg='지웠습니다.';}}
     else{board.reported.add(id);store.set('boardRep',[...board.reported].slice(-200));board.msg='신고했습니다.';}
   }catch(e){board.msg='처리하지 못했습니다. 잠시 뒤 다시 시도해 주세요.';}
   board.last=-1;paintBoard();loadBoard();}
+// 닉네임 길게 누르기(0.45초) → 그 사람을 @로 부르는 답글 쓰기.
+// 누르고 있는 동안 답글 대상을 정해 두고, 손을 뗄 때 댓글 칸으로 옮긴다 (아이폰은 손을 떼는 순간에만 자판을 띄울 수 있다).
+const lp={t:null,x:0,y:0,fired:false,tid:null};
+function lpFire(key){const a=key.split(':').map(x=>x?+x:null);lp.fired=true;lp.tid=a[0];
+  try{if(navigator.vibrate)navigator.vibrate(12);}catch(e){}
+  if(setReply(a[0],a[1],a[2])){const f=document.querySelector(`[data-cform="${a[0]}"]`);if(f){const r=f.getBoundingClientRect();if(r.bottom>window.innerHeight-70||r.top<60)f.scrollIntoView({block:'center'});}}else lp.tid=null;}
+function lpStop(){clearTimeout(lp.t);lp.t=null;}
+document.addEventListener('pointerdown',e=>{lpStop();lp.fired=false;const el=e.target.closest&&e.target.closest('[data-lp]');if(!el||(e.pointerType==='mouse'&&e.button!==0))return;
+  const key=el.dataset.lp;lp.x=e.clientX;lp.y=e.clientY;lp.t=setTimeout(()=>{lp.t=null;lpFire(key);},450);});
+document.addEventListener('pointermove',e=>{if(lp.t&&(Math.abs(e.clientX-lp.x)>10||Math.abs(e.clientY-lp.y)>10))lpStop();});
+document.addEventListener('pointerup',e=>{lpStop();if(e.pointerType!=='touch'&&lp.fired&&lp.tid!=null)focusComposer(lp.tid);});
+document.addEventListener('touchend',()=>{if(lp.fired&&lp.tid!=null)focusComposer(lp.tid);},{passive:true});
+document.addEventListener('pointercancel',lpStop);
+document.addEventListener('contextmenu',e=>{const el=e.target.closest&&e.target.closest('[data-lp]');if(!el||!board.v4)return;e.preventDefault();if(!lp.fired){lpStop();lpFire(el.dataset.lp);if(lp.tid!=null)focusComposer(lp.tid);}});
+window.addEventListener('scroll',()=>{if(lp.t)lpStop();},{passive:true});
 
 /* ---------- 틀 ---------- */
 function tabList(){return TABS.filter(t=>t[0]!=='board'||cloud.board.open);}
 function tabBadge(k){if(k==='fav')return `<b class="tb"${st.fav.size?'':' hidden'}>${st.fav.size||''}</b>`;
-  if(k==='board')return `<b class="tb dot"${cloud.board.last>board.seen&&st.tab!=='board'?'':' hidden'}></b>`;return '';}
+  if(k==='board')return `<b class="tb dot"${boardNew()&&st.tab!=='board'?'':' hidden'}></b>`;return '';}
 function renderTabs(){$('#tabs').innerHTML=tabList().map(([k,n,ic])=>`<button data-tab="${k}"${st.tab===k?' aria-current="page"':''}><span class="ti">${IC[ic]}${tabBadge(k)}</span><span>${n}</span></button>`).join('');}
 function render(){
   if(st.tab==='board'&&!cloud.board.open)st.tab='browse';
@@ -702,7 +920,7 @@ function route(){
   closeSheet();if(TABS.some(t=>t[0]===h))st.tab=h;render();
 }
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,1600);}
-function setMode(m){document.documentElement.dataset.mode=m;$('#modebtn').innerHTML=m==='dark'?IC.sun:IC.moon;store.set('mode',m);}function askMajor(first){panelMode='major';
+function setMode(m){document.documentElement.dataset.mode=m;$('#modebtn').innerHTML=m==='dark'?IC.sun:IC.moon;store.set('mode',m);}function askMajor(first){panelMode='major';$('#modal').classList.remove('top');
   $('#panel').innerHTML=`<h2>${first?'전공을 골라 주세요':'전공 바꾸기'}</h2><p>고른 전공의 인원과 조건을 먼저 보여 줍니다. 위쪽 ‘전공’ 단추에서 언제든 바꿀 수 있습니다.</p>
   ${[['nav','항해','항해 계열 인원·조건'],['eng','기관','기관 계열 인원·조건'],['all','전체','항해와 기관을 함께']].map(([k,n,d])=>`<button class="opt" data-major="${k}" aria-pressed="${st.major===k}"><b>${n}</b><small>${d}</small></button>`).join('')}`;
   $('#modal').hidden=false;
@@ -711,8 +929,17 @@ function toggleSet(set,key,id){if(set.has(id))set.delete(id);else set.add(id);st
 function refreshSheetButtons(){document.querySelectorAll('#sheet [data-fav]').forEach(b=>b.setAttribute('aria-pressed',st.fav.has(b.dataset.fav)));document.querySelectorAll('#sheet [data-seen]').forEach(b=>b.setAttribute('aria-pressed',st.seen.has(b.dataset.seen)));}
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-fav],[data-seen],[data-org],[data-tab],[data-cat],[data-metric],[data-bld],[data-spot],[data-zoomplan],[data-favview],[data-cg],[data-copy],[data-zoom],[data-close],[data-sec],[data-tomap],[data-major],[data-gomap],[data-bdel],[data-brep],[data-bmore],[data-vpick],[data-vday],[data-vap],[data-vmin],[data-vsave],[data-vhour],[data-vclear],[data-vskip],[data-favsort]');
+  const t=e.target.closest('[data-fav],[data-seen],[data-org],[data-tab],[data-cat],[data-metric],[data-bld],[data-spot],[data-zoomplan],[data-favview],[data-cg],[data-copy],[data-zoom],[data-close],[data-sec],[data-tomap],[data-major],[data-gomap],[data-bdel],[data-brep],[data-bmore],[data-vpick],[data-vday],[data-vap],[data-vmin],[data-vsave],[data-vhour],[data-vclear],[data-vskip],[data-favsort],[data-lp],[data-reply],[data-rcancel],[data-thread],[data-nickedit],[data-nroll],[data-nskip],[data-cmp],[data-cmpall]');
   if(!t)return;const d=t.dataset;
+  if('lp' in d){if(lp.fired){lp.fired=false;if(lp.tid!=null)focusComposer(lp.tid);}else if(board.v4)toast('닉네임을 꾹 누르면 @답글을 쓸 수 있습니다');return;}
+  if('reply' in d){const a=d.reply.split(':').map(x=>x?+x:null);if(setReply(a[0],a[1],a[2]))focusComposer(a[0]);return;}
+  if('rcancel' in d){delete board.reply[+d.rcancel];paintRto(+d.rcancel);return;}
+  if('thread' in d){toggleThread(+d.thread);return;}
+  if('nickedit' in d){askNick(false);return;}
+  if('nroll' in d){$('#nname').value=rollNick();$('#nmsg').textContent='';return;}
+  if('nskip' in d){nickCb=null;closeModal();return;}
+  if('cmp' in d){st.cmp[d.cmp]=!cmpHas(d.cmp);store.set('cmp',st.cmp);repaintFav();return;}
+  if('cmpall' in d){st.cmp={};if(d.cmpall==='none')for(const o of SHIP)st.cmp[o.id]=false;store.set('cmp',st.cmp);repaintFav();return;}
   if('bdel' in d){boardAct('del',+d.bdel,t);return;}
   if('brep' in d){boardAct('rep',+d.brep,t);return;}
   if('bmore' in d){loadBoard(true);return;}
@@ -736,7 +963,7 @@ document.addEventListener('click',e=>{
   if('close' in d){go(st.tab);return;}
   if('sec' in d){const el=document.querySelector(`#sheet details[data-key="${d.sec}"]`);if(el){el.open=true;el.scrollIntoView({block:'start'});$('#sheet').scrollTop-=56;}return;}
   if('tomap' in d){const o=ORG[d.tomap];const b=D.booths.find(x=>x.o===o.id);st.bld=o.bld;st.spot=b?b.i:null;st.zoom=false;st.tab='map';go('map');window.scrollTo(0,0);return;}
-  if('major' in d){st.major=d.major;store.set('major',st.major);$('#modal').hidden=true;if(st.org){render();openSheet(st.org);}else render();return;}
+  if('major' in d){st.major=d.major;store.set('major',st.major);closeModal();if(st.org){render();openSheet(st.org);}else render();maybeAskNick();return;}
   if('org' in d){go('o-'+d.org);return;}
   if('tab' in d){st.tab=d.tab;go(d.tab);window.scrollTo(0,0);return;}
   if('cat' in d){st.cat=d.cat;st.q='';render();return;}
@@ -752,10 +979,13 @@ document.addEventListener('input',e=>{
   if(e.target.id==='cq'){st.cq=e.target.value;$('#clist').innerHTML=contactList().map(c=>contactRow(c,true)).join('')||'<div class="empty">찾는 연락처가 없습니다.</div>';}
 });
 document.addEventListener('change',e=>{if(e.target.id==='sort'){st.sort=e.target.value;render();}});
-document.addEventListener('input',e=>{if(e.target.id==='btext'){const c=$('#bcnt');if(c)c.textContent=e.target.value.length+'/200';}});
-document.addEventListener('submit',e=>{if(e.target.id==='bform'){e.preventDefault();sendPost();}});
+document.addEventListener('input',e=>{const t=e.target;if(t.id==='btext'){const c=$('#bcnt');if(c)c.textContent=t.value.length+'/200';}
+  if(t.classList&&t.classList.contains('ctext')){board.draft[+t.dataset.ctext]=t.value;grow(t);}
+  if(t.id==='npin'){const v=t.value.replace(/\D/g,'').slice(0,4);if(v!==t.value)t.value=v;}});
+document.addEventListener('toggle',e=>{if(e.target.classList&&e.target.classList.contains('cpd'))st.cmpMore=e.target.open;},true);
+document.addEventListener('submit',e=>{const f=e.target;if(f.id==='bform'){e.preventDefault();sendPost();}else if(f.id==='nform'){e.preventDefault();saveNick();}else if(f.dataset&&f.dataset.cform){e.preventDefault();sendComment(+f.dataset.cform);}});
 $('#majbtn').addEventListener('click',()=>askMajor(false));
-$('#modal').addEventListener('click',e=>{if(e.target.id==='modal'&&st.major)$('#modal').hidden=true;});
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal'&&st.major&&panelMode!=='nick')closeModal();});
 $('#modebtn').addEventListener('click',()=>setMode(document.documentElement.dataset.mode==='dark'?'light':'dark'));
 $('#lbx').innerHTML=IC.x;$('#lbx').addEventListener('click',()=>{$('#lb').hidden=true;$('#lbimg').removeAttribute('src');});
 $('#lbz').addEventListener('click',()=>{const z=$('#lb').classList.toggle('zoom');$('#lbz').textContent=z?'화면에 맞추기':'크게';});
