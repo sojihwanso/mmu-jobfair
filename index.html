@@ -55,6 +55,46 @@ nav.tabs .wrap{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr
 .post .pa2 button{font-size:12px;color:var(--g1);padding:4px 0 4px 12px}
 .post .pa2 button[data-armed]{color:var(--accent);font-weight:600}
 .mine{color:var(--accent);font-weight:600}
+.vday{display:flex;gap:8px;margin-bottom:8px}
+.vday button{flex:1;height:40px;border:1px solid var(--line);border-radius:3px;font-size:13.5px}
+.vday button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:600}
+.vgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.vgrid button{height:52px;border:1px solid var(--line);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.vgrid button b{font-size:15px;font-weight:600}
+.vgrid button small{font-size:11px;color:var(--g1)}
+.vgrid button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.vgrid button[aria-pressed="true"] small{color:var(--on-accent)}
+.vgrid button[disabled]{opacity:.35}
+.vfoot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;min-height:32px}
+.vs{display:grid;gap:4px;margin:8px 0 2px}
+.vsr{display:grid;grid-template-columns:30px repeat(9,minmax(0,1fr));gap:3px;align-items:end}
+.vsr>span{font-size:12px;color:var(--g1);align-self:center}
+.vc{height:44px;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;border-bottom:1px solid var(--line)}
+.vc b{font-size:10.5px;font-weight:600;color:var(--g1);line-height:1;text-align:center;margin-bottom:2px}
+.vc i{display:block;background:var(--b)}
+.vc.pk i{background:var(--accent)}
+.vc.pk b{color:var(--accent)}
+.vc.me i{box-shadow:inset 0 0 0 1.5px var(--fg)}
+.vc.me{border-bottom-color:var(--fg)}
+.vsh span{font-size:11px;color:var(--g2);text-align:center}
+.vsh>span:first-child{color:transparent}
+.vap span{font-size:10.5px;color:var(--g2);text-align:center;border-top:1px solid var(--line);padding-top:2px}
+.vap>span:first-child{border:0}
+.vlab{font-size:12px;color:var(--g1);margin:10px 0 4px}
+.vmin{grid-template-columns:repeat(6,minmax(0,1fr))}
+.vmin button{height:44px}
+.vmin button b{font-size:13px}
+.vfoot .bsend{margin-left:auto}
+.vme{margin:10px 0 0;font-size:14px}
+.vme b{font-weight:600}
+.vt{display:flex;flex-direction:column;align-items:center;justify-content:center;width:60px;min-height:44px;line-height:1.15;color:var(--accent)}
+.vt b{font-size:14px;font-weight:600}
+.vt small{font-size:11px;color:var(--g1);text-align:center}
+#app .frow{grid-template-columns:40px minmax(0,1fr) 60px 40px}
+.fsort{display:flex;align-items:center;gap:6px;padding:10px 0 2px;font-size:12.5px;color:var(--g1)}
+.fsort button{height:30px;padding:0 10px;border:1px solid var(--line);border-radius:3px;font-size:12.5px}
+.fsort button[aria-pressed="true"]{border-color:var(--accent);color:var(--fg);font-weight:600}
+.post .nick{color:var(--fg);font-weight:600}
 @media (pointer:coarse){.q input,#btext,select{font-size:16px}}
 nav.tabs button{height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;white-space:nowrap;color:var(--g1);border-top:2px solid transparent;margin-top:-1px}
 nav.tabs button[aria-current="page"]{color:var(--accent);border-top-color:var(--accent);font-weight:600}
@@ -207,7 +247,7 @@ table.cmp th{min-width:128px}
 #modal,#lb{position:fixed;inset:0;z-index:50}
 #modal{background:rgba(0,0,0,.45);display:grid;place-items:end center}
 #modal[hidden],#lb[hidden],#sheet[hidden]{display:none}
-.panel{width:100%;max-width:560px;background:var(--bg);padding:20px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--line)}
+.panel{width:100%;max-width:560px;max-height:92vh;overflow-y:auto;background:var(--bg);padding:20px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--line)}
 .panel h2{margin:0 0 4px;font-size:17px;font-weight:600}
 .panel p{margin:0 0 14px;color:var(--g1);font-size:13.5px}
 .opt{display:flex;align-items:center;width:100%;height:52px;border:1px solid var(--line);border-radius:3px;padding:0 14px;margin-bottom:8px;gap:10px}
@@ -263,7 +303,7 @@ const store={get(k,d){try{const v=localStorage.getItem('mmujf.'+k);return v==nul
 /* ---------- 즐겨찾기 등록 수: 공용 저장소 (자체 주소판에서만 켜진다. 값이 비어 있으면 꺼진 채로 지금처럼 동작) ---------- */
 const HOSTED=true;
 const CLOUD={url:"https://ojgsvtekeyzdhrwhdccj.supabase.co",key:"sb_publishable_MlphL4ZwUTm0_h4JJfvCfw_BPQLGybc",poll:15000};
-const cloud={on:!!(CLOUD.url&&CLOUD.key),ok:false,counts:{},all:0,fail:0,at:0,board:{open:false,last:0,n:0}};
+const cloud={on:!!(CLOUD.url&&CLOUD.key),ok:false,counts:{},all:0,fail:0,at:0,board:{open:false,last:0,n:0},slots:{}};
 const POP={k:'pop',n:'관심',full:'즐겨찾기 등록',note:'이 페이지에서 즐겨찾기한 사람 수입니다. 브라우저 기준이라 실제 사람 수와 조금 다를 수 있고, 다른 사람이 누른 것은 10~15초 안에 보입니다. 순위는 탭을 다시 누르면 새로 매겨집니다.'};
 const canStore=(()=>{try{localStorage.setItem('mmujf.t','1');localStorage.removeItem('mmujf.t');return true;}catch(e){return false;}})();
 function cnt(id){return cloud.counts[id]||0;}
@@ -285,7 +325,7 @@ async function rpc(fn,body){const h={'apikey':CLOUD.key,'Content-Type':'applicat
 function applyCounts(rows){const c={};let all=0;for(const r of rows||[]){if(r.org_id==='_all')all=+r.cnt||0;else c[r.org_id]=+r.cnt||0;}
   cloud.counts=c;cloud.all=all;cloud.ok=true;cloud.fail=0;cloud.at=Date.now();paintCounts();}
 // 주기적으로 받는 값: 기업별 등록 수 + 게시판 상태(열림 여부, 최근 글 번호, 글 수)
-function applyPull(j){j=j||{};cloud.counts=j.counts||{};cloud.all=+j.all||0;cloud.ok=true;cloud.fail=0;cloud.at=Date.now();paintCounts();
+function applyPull(j){j=j||{};cloud.counts=j.counts||{};cloud.slots=j.slots||{};cloud.all=+j.all||0;cloud.ok=true;cloud.fail=0;cloud.at=Date.now();paintCounts();
   const b=j.board||{},was=cloud.board.open;cloud.board={open:!!b.open,last:+b.last||0,n:+b.n||0};
   if(was!==cloud.board.open){if(!cloud.board.open&&st.tab==='board'){st.tab='browse';if(!st.org)go('browse');}else renderTabs();}
   if(cloud.board.open){if(st.tab==='board'&&!st.org&&(cloud.board.last!==board.last||cloud.board.n!==board.n))loadBoard();
@@ -299,12 +339,19 @@ function paintCounts(){
   document.querySelectorAll('[data-fcn]').forEach(el=>{el.textContent=cloud.ok?cnt(el.dataset.fcn)+'명':'–';});
   const mx=Math.max(1,...SHIP.map(o=>cnt(o.id)));
   document.querySelectorAll('[data-fcb]').forEach(el=>{el.style.width=(cnt(el.dataset.fcb)/mx*100).toFixed(1)+'%';});
-  const t=$('#popnote');if(t)t.textContent=popNote();const s=$('#cloudstat');if(s)s.textContent=cloudStat();}
+  const t=$('#popnote');if(t)t.textContent=popNote();const s=$('#cloudstat');if(s)s.textContent=cloudStat();
+  document.querySelectorAll('[data-vs]').forEach(el=>{el.innerHTML=slotsHTML(el.dataset.vs||null);});
+  document.querySelectorAll('[data-vpeak]').forEach(el=>{el.textContent=peakText(el.dataset.vpeak||null);});
+  document.querySelectorAll('[data-vpk]').forEach(el=>{el.textContent=peakShort(el.dataset.vpk);});
+  if(panelMode==='visit'&&!$('#modal').hidden)paintPicker();}
 let syncT=null,syncBusy=false,syncAgain=false;
+async function rpcSync(){const vis={};for(const id of st.fav)if(st.visit[id])vis[id]=st.visit[id];
+  try{return await rpc('fair_sync',{p_device:deviceId(),p_orgs:[...st.fav],p_visits:vis});}
+  catch(e){if(/HTTP 40[04]/.test(e.message))return await rpc('fair_sync',{p_device:deviceId(),p_orgs:[...st.fav]});throw e;}}
 // 내 즐겨찾기 목록을 저장소와 맞추고 최신 숫자를 받는다. 연달아 눌러도 0.7초 뒤 한 번만 보낸다.
 function cloudSync(now){if(!cloud.on)return;clearTimeout(syncT);syncT=setTimeout(async()=>{
   if(syncBusy){syncAgain=true;return;}syncBusy=true;
-  try{applyCounts(canStore?await rpc('fair_sync',{p_device:deviceId(),p_orgs:[...st.fav]}):await rpc('fair_counts'));}catch(e){cloudFail(e);}
+  try{applyCounts(canStore?await rpcSync():await rpc('fair_counts'));}catch(e){cloudFail(e);}
   syncBusy=false;if(syncAgain){syncAgain=false;cloudSync(true);}},now?0:700);}
 async function cloudPoll(force){if(!cloud.on||document.visibilityState!=='visible'||(syncBusy&&!force))return;try{applyPull(await rpc('fair_pull'));}catch(e){cloudFail(e);}}
 function cloudStart(){if(!cloud.on)return;cloudPoll(true).then(()=>cloudSync(true));
@@ -312,6 +359,55 @@ function cloudStart(){if(!cloud.on)return;cloudPoll(true).then(()=>cloudSync(tru
   const gap=()=>cloud.fail>=3?120000:(st.tab==='browse'&&st.metric==='pop'&&!st.org?Math.min(CLOUD.poll,10000):CLOUD.poll);
   const loop=()=>setTimeout(async()=>{await cloudPoll();loop();},gap());loop();
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-cloud.at>15000)cloudPoll();});}
+
+/* ---------- 방문 예정 시간 ---------- */
+const VDAYS=[[12,'11월 12일(목)'],[13,'11월 13일(금)']],VHOURS=[9,10,11,12,13,14,15,16,17],VMINS=[0,10,20,30,40,50];
+const AMH=[9,10,11],PMH=[12,13,14,15,16,17];
+let vpick={id:null,day:12,ap:'am',h:null,m:null,fresh:false},panelMode='';
+// 저장 형식: "12-14-30" = 12일 14시 30분. 예전 형식 "12-14"는 0분으로 읽는다.
+function vparse(v){if(!v)return null;const a=v.split('-').map(Number);return {d:a[0],h:a[1],m:a[2]||0};}
+const h12=h=>h>12?h-12:h, apOf=h=>h<12?'오전':'오후', mm=m=>String(m).padStart(2,'0');
+function vlabel(v){const p=vparse(v);return p?`${p.d}일 ${apOf(p.h)} ${h12(p.h)}:${mm(p.m)}`:'';}
+function hourLabel(k){const [d,h]=k.split('-').map(Number);return `${d}일 ${apOf(h)} ${h12(h)}시`;}
+const slotKey=v=>{const p=vparse(v);return p?p.d+'-'+p.h:null;};
+function slotMap(id){if(id)return cloud.slots[id]||{};const m={};for(const s of Object.values(cloud.slots))for(const k in s)m[k]=(m[k]||0)+s[k];return m;}
+function peakOf(m){let b=null;for(const k in m)if(m[k]>0&&(!b||m[k]>m[b]))b=k;return b;}
+function peakText(id){if(!cloud.ok)return '방문 예정 시간을 불러오는 중입니다…';const m=slotMap(id),pk=peakOf(m);return pk?`가장 많이 몰리는 시간: ${hourLabel(pk)}대 (${m[pk]}명 예정)`:'아직 방문 시간을 고른 사람이 없습니다.';}
+function peakShort(id){const m=slotMap(id),pk=peakOf(m);return pk?`많이 몰리는 시간 ${hourLabel(pk)}대 · ${m[pk]}명`:'';}
+function pastTime(d,h,m){const n=new Date();if(n.getFullYear()!==2026||n.getMonth()!==10)return n>new Date(2026,10,14);
+  const t=n.getDate()*1440+n.getHours()*60+n.getMinutes();return d*1440+h*60+m+9<t;}
+const pastHour=(d,h)=>pastTime(d,h,50);
+function slotsHTML(id){const m=slotMap(id),pk=peakOf(m),mx=Math.max(1,...Object.values(m)),mine=id?slotKey(st.visit[id]):null;
+  return `<div class="vs">${VDAYS.map(([d])=>`<div class="vsr"><span>${d}일</span>${VHOURS.map(h=>{const k=d+'-'+h,n=m[k]||0;
+    return `<div class="vc${k===pk?' pk':''}${k===mine?' me':''}" title="${hourLabel(k)}대 ${n}명"><b>${n||''}</b><i style="height:${n?Math.max(8,n/mx*70).toFixed(0):0}%"></i></div>`;}).join('')}</div>`).join('')}
+    <div class="vsr vsh"><span></span>${VHOURS.map(h=>`<span>${h12(h)}</span>`).join('')}</div>
+    <div class="vsr vap"><span></span><span style="grid-column:span 3">오전</span><span style="grid-column:span 6">오후 (시)</span></div></div>`;}
+function vtInner(id){const p=vparse(st.visit[id]);if(!p)return '<small>시간<br>선택</small>';return `<b>${h12(p.h)}:${mm(p.m)}</b><small>${p.d}일 ${apOf(p.h)}</small>`;}
+function vmeInner(id){if(!st.fav.has(id))return '즐겨찾기에 넣으면 방문할 시간을 고를 수 있습니다.';const v=st.visit[id];
+  return `내 방문 예정 <b>${v?vlabel(v):'아직 고르지 않음'}</b> <button class="txtbtn" data-vpick="${id}">${v?'바꾸기':'고르기'}</button>`;}
+function paintVisit(id){document.querySelectorAll(`[data-vt="${id}"]`).forEach(e=>{e.innerHTML=vtInner(id);});
+  document.querySelectorAll(`[data-vme="${id}"]`).forEach(e=>{e.innerHTML=vmeInner(id);});
+  if(st.tab==='fav'&&st.favSort==='time'&&!st.org){const y=window.scrollY;render();window.scrollTo(0,y);}}
+function setVisit(id,val){const old=st.visit[id]||null;if(old===val)return;const ok=slotKey(old),nk=slotKey(val);
+  if(cloud.ok&&ok!==nk){const s=cloud.slots[id]=cloud.slots[id]||{};if(ok)s[ok]=Math.max(0,(s[ok]||0)-1);if(nk)s[nk]=(s[nk]||0)+1;}
+  if(val)st.visit[id]=val;else delete st.visit[id];store.set('visit',st.visit);paintCounts();paintVisit(id);cloudSync();}
+function askVisit(id,fresh){const p=vparse(st.visit[id]),n=new Date();
+  const d=p?p.d:(n.getMonth()===10&&n.getDate()===13?13:12);
+  vpick={id,fresh:!!fresh,day:d,ap:p?(p.h<12?'am':'pm'):(n.getHours()>=12?'pm':'am'),h:p?p.h:null,m:p?p.m:null};
+  panelMode='visit';paintPicker();$('#modal').hidden=false;}
+function paintPicker(){const {id,day,ap,h,m:mi,fresh}=vpick,o=ORG[id];if(!o)return;const v=st.visit[id],cnt=slotMap(id);
+  const hours=ap==='am'?AMH:PMH,ready=h!=null&&mi!=null&&!pastTime(day,h,mi);
+  $('#panel').innerHTML=`<h2>${fresh?'즐겨찾기에 넣었습니다':'방문 시간 고르기'}</h2>
+  <p><b>${esc(o.name)}</b>${o.code?` · ${esc(o.code)}`:''}<br>몇 시에 방문할 예정인가요? <b>시간은 박람회장 포스터에서 확인하세요.</b></p>
+  <div class="vday">${VDAYS.map(([d,l])=>`<button data-vday="${d}" aria-pressed="${d===day}">${l}</button>`).join('')}</div>
+  <div class="vday">${[['am','오전'],['pm','오후']].map(([k,l])=>`<button data-vap="${k}" aria-pressed="${k===ap}">${l}</button>`).join('')}</div>
+  <div class="vlab">시</div>
+  <div class="vgrid">${hours.map(x=>{const past=pastHour(day,x);
+    return `<button data-vhour="${x}" aria-pressed="${h===x}"${past?' disabled':''}><b>${h12(x)}시</b><small>${past?'지난 시간':cloud.ok?`예정 ${cnt[day+'-'+x]||0}명`:''}</small></button>`;}).join('')}</div>
+  <div class="vlab">분</div>
+  <div class="vgrid vmin">${VMINS.map(x=>{const dis=h==null||pastTime(day,h,x);return `<button data-vmin="${x}" aria-pressed="${mi===x&&h!=null}"${dis?' disabled':''}><b>${mm(x)}분</b></button>`;}).join('')}</div>
+  <div class="vfoot"><button class="txtbtn" data-vskip>${fresh?'나중에 고르기':'닫기'}</button>${v?'<button class="txtbtn" data-vclear>시간 지우기</button>':''}
+   <button class="bsend" data-vsave${ready?'':' disabled'}>${ready?`${day}일 ${apOf(h)} ${h12(h)}:${mm(mi)} 저장`:'시간을 골라 주세요'}</button></div>`;}
 
 const METRICS=[
  {k:'cadet',n:'실습생',full:'승선실습생',note:'2027년 승선실습생 선발계획 · <span class="key nav"></span>항해 <span class="key eng"></span>기관',plus:1},
@@ -330,7 +426,7 @@ const SECNAME={intro:'기업소개',cadet:'승선실습생 선발계획',scholar
 const CGROUPS=['전체','해운선사','관련 기관·단체','관공서','해기사 회관','마리너스 빌딩'];
 
 let D=null,ORG={},SHIP=[],AG=[],BORDER={};
-const st={tab:'browse',cat:'ship',metric:'cadet',sort:'val',q:'',major:store.get('major',null),fav:new Set(store.get('fav',[])),seen:new Set(store.get('seen',[])),bld:'A',spot:null,zoom:false,favView:'list',cq:'',cg:'전체',org:null};
+const st={tab:'browse',cat:'ship',metric:'cadet',sort:'val',q:'',major:store.get('major',null),fav:new Set(store.get('fav',[])),seen:new Set(store.get('seen',[])),bld:'A',spot:null,zoom:false,favView:'list',favSort:'booth',visit:store.get('visit',{}),cq:'',cg:'전체',org:null};
 const maj=()=>st.major||'all';
 const mv=(o,k)=>k==='pop'?popView(o):(o.m[k][maj()]||o.m[k].all);
 const floorOf=r=>/^\d{4}/.test(r)?r[1]+'층':'';
@@ -345,7 +441,7 @@ function vizHTML(z,max){
 }
 function rowHTML(o,key,max){
   if(key==='pop'){const n=cnt(o.id);
-    return `<li class="row"><button class="main" data-org="${o.id}"><span class="code">${o.code}</span><span class="nm">${esc(o.name)}</span><span class="val" data-fcn="${o.id}">${cloud.ok?n+'명':'–'}</span><span class="bar"><i class="a" data-fcb="${o.id}" style="width:${max?(n/max*100).toFixed(1):0}%"></i></span></button>${starBtn(o.id)}</li>`;}
+    return `<li class="row"><button class="main" data-org="${o.id}"><span class="code">${o.code}</span><span class="nm">${esc(o.name)}</span><span class="val" data-fcn="${o.id}">${cloud.ok?n+'명':'–'}</span><span class="bar"><i class="a" data-fcb="${o.id}" style="width:${max?(n/max*100).toFixed(1):0}%"></i></span><span class="sub" data-vpk="${o.id}">${esc(peakShort(o.id))}</span></button>${starBtn(o.id)}</li>`;}
   const m=mv(o,key);const long=m.v.length>10;
   let l2;
   if(m.z&&m.z.t==='cols'){const c=maj()==='eng'?'eng':maj()==='nav'?'nav':'a';
@@ -377,7 +473,7 @@ function renderBrowse(){
   ${ship?`<div class="scroller"><div class="segs" id="mtabs">${MT.map(x=>`<button data-metric="${x.k}" aria-pressed="${x.k===st.metric}">${x.n}</button>`).join('')}</div></div>`:''}
   <div class="tools"><label class="q">${IC.search}<input id="q" type="search" placeholder="${ship?'기업 이름 또는 부스 번호':'기관 이름'}" value="${esc(st.q)}" autocomplete="off"></label>
    <select id="sort" aria-label="정렬"><option value="val"${st.sort==='val'?' selected':''}>${ship?'값 순':'부스 순'}</option>${ship?`<option value="booth"${st.sort==='booth'?' selected':''}>부스 순</option>`:''}<option value="name"${st.sort==='name'?' selected':''}>이름 순</option></select></div>
-  ${ship?`<p class="note">${M.note}${M.plus?'<br>'+PLUSNOTE:''}${M.k==='pop'?`<br><b id="popnote">${esc(popNote())}</b>`:''}</p>`:'<p class="note">관계기관은 채용계획을 책자 표기 그대로 보여 줍니다. 눌러서 전체 내용을 확인하세요.</p>'}
+  ${ship?`<p class="note">${M.note}${M.plus?'<br>'+PLUSNOTE:''}${M.k==='pop'?`<br><b id="popnote">${esc(popNote())}</b>`:''}</p>${M.k==='pop'?`<div class="h">시간대별 방문 예정 (전체 기업)</div><div data-vs="">${slotsHTML(null)}</div><p class="note" data-vpeak="">${esc(peakText(null))}</p>`:''}`:'<p class="note">관계기관은 채용계획을 책자 표기 그대로 보여 줍니다. 눌러서 전체 내용을 확인하세요.</p>'}
   <ul class="rows" id="rows">${rows||'<li class="empty">찾는 이름이 없습니다.</li>'}</ul>
   <p class="note">2026 MMU 취업박람회 책자의 내용을 정리한 화면입니다. 숫자와 표기는 책자 그대로이며, 기업을 누르면 책자 원문 표와 쪽수를 볼 수 있습니다.</p>`;
   centerTab('#mtabs');
@@ -389,7 +485,8 @@ function centerTab(sel){const b=document.querySelector(sel+' [aria-pressed="true
 function syncFav(id){const on=st.fav.has(id);
   document.querySelectorAll(`[data-fav="${id}"]`).forEach(b=>b.setAttribute('aria-pressed',on));
   const bo=D.booths.find(x=>x.o===id);if(bo)document.querySelectorAll(`.hs[data-spot="${bo.i}"]`).forEach(h=>h.classList.toggle('fav',on));
-  const tb=document.querySelector('#tabs [data-tab="fav"] .tb');if(tb){tb.textContent=st.fav.size||'';tb.hidden=!st.fav.size;}}
+  const tb=document.querySelector('#tabs [data-tab="fav"] .tb');if(tb){tb.textContent=st.fav.size||'';tb.hidden=!st.fav.size;}
+  document.querySelectorAll(`[data-vme="${id}"]`).forEach(e=>{e.innerHTML=vmeInner(id);});}
 
 /* ---------- 상세 ---------- */
 function cellHTML(c,tag,cls){const span=(c.rs>1?` rowspan="${c.rs}"`:'')+(c.cs>1?` colspan="${c.cs}"`:'');let k=cls||'';const t=c.t||'';if(tag==='td'&&t.length>26)k+=' l';
@@ -429,6 +526,9 @@ function sheetHTML(o){
    <div class="hd">${o.logo?`<img class="logo" src="${o.logo.src}" width="${o.logo.w}" height="${o.logo.h}" alt="">`:''}<h1>${o.names.map(esc).join('<br>')}</h1>
     <div class="meta">${esc(where)}${o.bld?` · <button class="txtbtn" data-tomap="${o.id}">지도에서 보기</button>`:''}<br>${o.urls.map(linkify).join(' · ')}${o.urls.length?'<br>':''}책자 ${o.pages[0]}–${o.pages[1]}쪽 · ${o.cat}</div></div>
    <div class="acts"><button class="act" data-fav="${o.id}" aria-pressed="${st.fav.has(o.id)}"><span class="st">${IC.star}</span>즐겨찾기${cloud.on?` <span data-fc="${o.id}">${fcText(o.id)}</span>`:''}</button><button class="act" data-seen="${o.id}" aria-pressed="${st.seen.has(o.id)}">${IC.check}방문 완료</button></div>
+   <div class="h">방문 예정 시간</div><p class="vme" data-vme="${o.id}">${vmeInner(o.id)}</p>
+   ${cloud.on?`<div data-vs="${o.id}">${slotsHTML(o.id)}</div><p class="note" data-vpeak="${o.id}">${esc(peakText(o.id))}</p>`:''}
+   <p class="note">시간은 박람회장 포스터에서 확인하세요.${cloud.on?' 막대는 이 기업을 즐겨찾기한 사람들이 고른 방문 예정 시간이고, 테두리가 있는 칸이 내가 고른 시간입니다.':''}</p>
    ${sum}
    ${cts.length?`<div class="h">연락처 (책자 167쪽)</div>${cts.map(c=>contactRow(c,false)).join('')}`:''}
    <div class="h">책자 원문</div>${secs}
@@ -481,10 +581,13 @@ function renderFav(){
   if(!L.length){$('#app').innerHTML=`<div class="empty">아직 즐겨찾기한 곳이 없습니다.<br>둘러보기나 지도에서 기업 이름 옆의 별을 누르면<br>여기에 모이고, 방문한 곳을 체크할 수 있습니다.<br><br><button class="txtbtn" data-tab="browse">둘러보기로 가기</button></div>`;return;}
   const done=L.filter(o=>st.seen.has(o.id)).length;
   let body='';
-  if(st.favView==='list'){let prev='';
-    body=L.map(o=>{const head=o.bld!==prev?`<div class="h">${o.bld} ${D.bld[o.bld].name}</div>`:'';prev=o.bld;const s=st.seen.has(o.id);
-      return `${head}<div class="frow${s?' done':''}"><button class="chk" data-seen="${o.id}" aria-pressed="${s}" aria-label="방문 완료"><span>${IC.check}</span></button><button class="fm" data-org="${o.id}"><div class="nm">${esc(o.name)}</div><div class="code">${o.code} · ${o.room}${/^\d/.test(o.room)?'호':''} ${floorOf(o.room)}</div></button>${starBtn(o.id)}</div>`;}).join('');
-    body+=`<p class="note">건물과 부스 번호 순서입니다. 왼쪽 네모를 누르면 방문 완료로 표시됩니다. 참석 확인서에는 확인 스티커 2개 이상이 필요합니다(책자 168~169쪽). <button class="txtbtn" data-tab="info">안내 보기</button></p>`;
+  if(st.favView==='list'){let prev='';const byTime=st.favSort==='time';
+    const vkey=o=>{const p=vparse(st.visit[o.id]);return p?p.d*10000+p.h*100+p.m:999999;};
+    const LL=byTime?[...L].sort((a,b)=>vkey(a)-vkey(b)||BORDER[a.id]-BORDER[b.id]):L;
+    body=`<div class="fsort"><span>정렬</span><button data-favsort="booth" aria-pressed="${!byTime}">부스 순</button><button data-favsort="time" aria-pressed="${byTime}">방문 시간 순</button></div>`+LL.map(o=>{
+      const g=byTime?(st.visit[o.id]?hourLabel(slotKey(st.visit[o.id])):'시간 미정'):`${o.bld} ${D.bld[o.bld].name}`;const head=g!==prev?`<div class="h">${g}</div>`:'';prev=g;const s=st.seen.has(o.id);
+      return `${head}<div class="frow${s?' done':''}"><button class="chk" data-seen="${o.id}" aria-pressed="${s}" aria-label="방문 완료"><span>${IC.check}</span></button><button class="fm" data-org="${o.id}"><div class="nm">${esc(o.name)}</div><div class="code">${o.code} · ${o.room}${/^\d/.test(o.room)?'호':''} ${floorOf(o.room)}</div></button><button class="vt" data-vpick="${o.id}" data-vt="${o.id}" aria-label="방문 시간">${vtInner(o.id)}</button>${starBtn(o.id)}</div>`;}).join('');
+    body+=`<p class="note">${byTime?'고른 방문 시간 순서입니다.':'건물과 부스 번호 순서입니다.'} 왼쪽 네모를 누르면 방문 완료로, 오른쪽 시간을 누르면 방문 예정 시간을 바꿀 수 있습니다. 시간은 박람회장 포스터에서 확인하세요. 참석 확인서에는 확인 스티커 2개 이상이 필요합니다(책자 168~169쪽). <button class="txtbtn" data-tab="info">안내 보기</button></p>`;
   }else{const S=L.filter(o=>o.m);
     body=S.length?`<div class="tw"><table class="t cmp"><tr><th></th>${S.map(o=>`<th><button data-org="${o.id}">${esc(o.name)}<br><span class="code">${o.code}</span></button></th>`).join('')}</tr>
       ${cloud.on?`<tr><td>${POP.full}</td>${S.map(o=>`<td><b data-fcn="${o.id}">${cloud.ok?cnt(o.id)+'명':'–'}</b></td>`).join('')}</tr>`:''}
@@ -535,7 +638,7 @@ const BWHY={closed:'게시판이 닫혀 있습니다.',empty:'내용을 입력�
 function postTime(at){const t=new Date(at),n=new Date();const hm=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
   return t.toDateString()===n.toDateString()?hm:`${t.getMonth()+1}/${t.getDate()} ${hm}`;}
 function postHTML(p){const o=p.org&&ORG[p.org];const rep=board.reported.has(p.id);
-  return `<div class="post"><div class="pm"><span>${postTime(p.at)}</span>${o?`<button class="lk" data-org="${o.id}">${esc(o.code)} ${esc(o.name)}</button>`:''}${p.mine?'<span class="mine">내 글</span>':''}</div>
+  return `<div class="post"><div class="pm"><b class="nick">${esc(p.name||'익명')}</b><span>${postTime(p.at)}</span>${o?`<button class="lk" data-org="${o.id}">${esc(o.code)} ${esc(o.name)}</button>`:''}${p.mine?'<span class="mine">내 글</span>':''}</div>
   <div class="pb">${esc(p.body)}</div>
   <div class="pa2">${p.mine?`<button data-bdel="${p.id}">삭제</button>`:rep?'<span>신고함</span>':`<button data-brep="${p.id}">신고</button>`}</div></div>`;}
 // 글 목록만 제자리에서 바꾼다 (쓰고 있던 글과 스크롤은 그대로 둔다)
@@ -556,7 +659,7 @@ function renderBoard(){
   const orgs=[...D.orgs].sort((a,b)=>BORDER[a.id]-BORDER[b.id]);
   $('#app').innerHTML=`
   <form id="bform" autocomplete="off"><label class="hh" for="btext" style="display:block;padding-top:16px">게시판</label>
-   <p class="note">익명으로 남기는 박람회 질문·정보 게시판입니다. 특정 기업이나 사람에 대한 비방, 개인정보, 광고는 올리지 마세요. 링크와 전화번호는 올릴 수 없고, 신고가 3번 쌓인 글은 자동으로 숨겨집니다.</p>
+   <p class="note">익명으로 남기는 박람회 질문·정보 게시판입니다. 특정 기업이나 사람에 대한 비방, 개인정보, 광고는 올리지 마세요. 링크와 전화번호는 올릴 수 없고, 신고가 3번 쌓인 글은 자동으로 숨겨집니다. 글에는 ‘졸린 해달’처럼 형용사와 동물 이름을 합친 별명이 자동으로 붙고(2,000가지), 같은 브라우저에서 쓴 글은 같은 별명입니다.</p>
    <textarea id="btext" maxlength="200" rows="3" placeholder="예: A-1 부스는 11시 이후가 덜 붐벼요"></textarea>
    <div class="bbar"><select id="borg" aria-label="기업 꼬리표"><option value="">기업 꼬리표 없음</option>${orgs.map(o=>`<option value="${o.id}">${esc(o.code)} ${esc(o.name)}</option>`).join('')}</select><span class="cnt" id="bcnt">0/200</span><button class="bsend" type="submit">올리기</button></div>
    <div class="bmsg" id="bmsg" role="status"></div></form>
@@ -599,7 +702,7 @@ function route(){
   closeSheet();if(TABS.some(t=>t[0]===h))st.tab=h;render();
 }
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,1600);}
-function setMode(m){document.documentElement.dataset.mode=m;$('#modebtn').innerHTML=m==='dark'?IC.sun:IC.moon;store.set('mode',m);}function askMajor(first){
+function setMode(m){document.documentElement.dataset.mode=m;$('#modebtn').innerHTML=m==='dark'?IC.sun:IC.moon;store.set('mode',m);}function askMajor(first){panelMode='major';
   $('#panel').innerHTML=`<h2>${first?'전공을 골라 주세요':'전공 바꾸기'}</h2><p>고른 전공의 인원과 조건을 먼저 보여 줍니다. 위쪽 ‘전공’ 단추에서 언제든 바꿀 수 있습니다.</p>
   ${[['nav','항해','항해 계열 인원·조건'],['eng','기관','기관 계열 인원·조건'],['all','전체','항해와 기관을 함께']].map(([k,n,d])=>`<button class="opt" data-major="${k}" aria-pressed="${st.major===k}"><b>${n}</b><small>${d}</small></button>`).join('')}`;
   $('#modal').hidden=false;
@@ -608,15 +711,24 @@ function toggleSet(set,key,id){if(set.has(id))set.delete(id);else set.add(id);st
 function refreshSheetButtons(){document.querySelectorAll('#sheet [data-fav]').forEach(b=>b.setAttribute('aria-pressed',st.fav.has(b.dataset.fav)));document.querySelectorAll('#sheet [data-seen]').forEach(b=>b.setAttribute('aria-pressed',st.seen.has(b.dataset.seen)));}
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-fav],[data-seen],[data-org],[data-tab],[data-cat],[data-metric],[data-bld],[data-spot],[data-zoomplan],[data-favview],[data-cg],[data-copy],[data-zoom],[data-close],[data-sec],[data-tomap],[data-major],[data-gomap],[data-bdel],[data-brep],[data-bmore]');
+  const t=e.target.closest('[data-fav],[data-seen],[data-org],[data-tab],[data-cat],[data-metric],[data-bld],[data-spot],[data-zoomplan],[data-favview],[data-cg],[data-copy],[data-zoom],[data-close],[data-sec],[data-tomap],[data-major],[data-gomap],[data-bdel],[data-brep],[data-bmore],[data-vpick],[data-vday],[data-vap],[data-vmin],[data-vsave],[data-vhour],[data-vclear],[data-vskip],[data-favsort]');
   if(!t)return;const d=t.dataset;
   if('bdel' in d){boardAct('del',+d.bdel,t);return;}
   if('brep' in d){boardAct('rep',+d.brep,t);return;}
   if('bmore' in d){loadBoard(true);return;}
   if('gomap' in d){st.bld=d.gomap;st.spot=null;st.zoom=false;st.tab='map';go('map');window.scrollTo(0,0);return;}
-  if('fav' in d){toggleSet(st.fav,'fav',d.fav);syncFav(d.fav);
-    if(cloud.ok){cloud.counts[d.fav]=Math.max(0,cnt(d.fav)+(st.fav.has(d.fav)?1:-1));paintCounts();}cloudSync();
-    toast(st.fav.has(d.fav)?'즐겨찾기에 넣었습니다':'즐겨찾기에서 뺐습니다');return;}
+  if('fav' in d){toggleSet(st.fav,'fav',d.fav);syncFav(d.fav);const on=st.fav.has(d.fav);
+    if(cloud.ok){cloud.counts[d.fav]=Math.max(0,cnt(d.fav)+(on?1:-1));paintCounts();}
+    if(on)askVisit(d.fav,true);else{setVisit(d.fav,null);toast('즐겨찾기에서 뺐습니다');}cloudSync();return;}
+  if('vpick' in d){askVisit(d.vpick,false);return;}
+  if('vday' in d){vpick.day=+d.vday;if(vpick.h!=null&&pastHour(vpick.day,vpick.h)){vpick.h=null;vpick.m=null;}paintPicker();return;}
+  if('vap' in d){if(vpick.ap!==d.vap){vpick.ap=d.vap;vpick.h=null;vpick.m=null;}paintPicker();return;}
+  if('vhour' in d){vpick.h=+d.vhour;if(vpick.m==null||pastTime(vpick.day,vpick.h,vpick.m))vpick.m=VMINS.find(x=>!pastTime(vpick.day,vpick.h,x))??null;paintPicker();return;}
+  if('vmin' in d){vpick.m=+d.vmin;paintPicker();return;}
+  if('vsave' in d){const {day,h,m:mi}=vpick;if(h==null||mi==null)return;const k=`${day}-${h}-${mi}`;setVisit(vpick.id,k);$('#modal').hidden=true;toast(`${vlabel(k)} 방문 예정으로 저장했습니다`);return;}
+  if('vclear' in d){setVisit(vpick.id,null);$('#modal').hidden=true;toast('방문 시간을 지웠습니다');return;}
+  if('vskip' in d){$('#modal').hidden=true;return;}
+  if('favsort' in d){st.favSort=d.favsort;render();return;}
   if('seen' in d){toggleSet(st.seen,'seen',d.seen);if(st.org)refreshSheetButtons();else render();return;}
   if('copy' in d){const txt=d.copy;const ok=()=>toast(txt+' 복사했습니다');const no=()=>toast('번호를 길게 눌러 복사하세요');
     try{navigator.clipboard.writeText(txt).then(ok,no);}catch(err){no();}return;}
